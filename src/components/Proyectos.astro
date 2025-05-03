@@ -1,30 +1,34 @@
 ---
 const proyectos = [
   {
-    titulo: 'E-commerce de Moda',
-    descripcion: 'Tienda online completa con pasarela de pagos y gestión de inventario.',
-    imagen: '/smr2.png',
-    categoria: 'E-commerce',
-    url: '#'
-  },
-  {
-    titulo: 'Portal Inmobiliario',
-    descripcion: 'Plataforma para búsqueda y gestión de propiedades inmobiliarias.',
-    imagen: '/placeholder.svg?height=400&width=600&query=real estate property listing website',
+    titulo: 's.m.r. ingeniería',
+    descripcion: 'Web de ingeniería con acceso privado a planos para clientes.',
+    imagen: '/smr4.png',
+    imagenMovil: '/smrm.png', // Versión optimizada para móviles
     categoria: 'Web App',
-    url: '#'
+    url: 'https://smringenieria.netlify.app/'
   },
   {
-    titulo: 'Blog de Viajes',
-    descripcion: 'Blog con sistema de gestión de contenidos personalizado.',
-    imagen: '/placeholder.svg?height=400&width=600&query=travel blog website with mountains',
-    categoria: 'Blog',
-    url: '#'
+    titulo: 'Tonalux',
+    descripcion: 'Tienda online de LUTs cinematográficos para creadores visuales.',
+    imagen: '/tona.png',
+    imagenMovil: '/tonamovil.png',
+    categoria: 'E-commerce',
+    url: 'https://tonalux.me/'
+  },
+  {
+    titulo: 'Portafolio Personal',
+    descripcion: 'Portafolio personal con CV, proyectos y contacto profesional.',
+    imagen: '/porpc2.png',
+    imagenMovil: '/pormovil.png',
+    categoria: 'Portafolio',
+    url: 'https://tomasramos.vercel.app/'
   },
   {
     titulo: 'Dashboard Analítico',
     descripcion: 'Panel de control para visualización de datos empresariales.',
     imagen: '/placeholder.svg?height=400&width=600&query=business analytics dashboard dark theme',
+    imagenMovil: '/placeholder.svg?height=400&width=400&query=mobile analytics dashboard',
     categoria: 'Dashboard',
     url: '#'
   }
@@ -40,14 +44,23 @@ const proyectos = [
 
     <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
       {proyectos.map(proyecto => (
-        <a href={proyecto.url} class="group">
+        <a href={proyecto.url} class="group" target="_blank" rel="noopener noreferrer">
           <div class="overflow-hidden rounded-xl bg-zinc-800 dark:bg-zinc-800 hover:bg-zinc-800/80 dark:hover:bg-zinc-800/80 transition-colors">
             <div class="overflow-hidden">
-              <img 
-                src={proyecto.imagen || "/placeholder.svg"} 
-                alt={proyecto.titulo} 
-                class="w-full h-64 object-cover transition-transform duration-500 group-hover:scale-105"
-              />
+              <picture>
+                {/* Imagen para móviles (hasta 768px) */}
+                <source 
+                  media="(max-width: 768px)" 
+                  srcset={proyecto.imagenMovil || proyecto.imagen} 
+                />
+                {/* Imagen para desktop (mayor a 768px) */}
+                <img 
+                  src={proyecto.imagen || "/placeholder.svg"} 
+                  alt={proyecto.titulo} 
+                  class="w-full h-64 object-cover transition-transform duration-500 group-hover:scale-105"
+                  loading="lazy"
+                />
+              </picture>
             </div>
             <div class="p-6">
               <div class="flex justify-between items-center mb-2">
@@ -61,8 +74,8 @@ const proyectos = [
       ))}
     </div>
 
-    <div class="text-center mt-12">
+    <!-- <div class="text-center mt-12">
       <a href="#contacto" class="btn-outline">Ver más proyectos</a>
-    </div>
+    </div> -->
   </div>
 </section>

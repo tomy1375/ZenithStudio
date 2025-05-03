@@ -35,15 +35,17 @@ const faqs = [
     <div class="max-w-3xl mx-auto">
       {faqs.map((faq, index) => (
         <div class="mb-6 border-b border-zinc-800 pb-6 last:border-0">
-          <details class="group">
+          <details class="group faq-item">
             <summary class="flex justify-between items-center cursor-pointer list-none">
               <h3 class="text-xl font-medium">{faq.pregunta}</h3>
               <span class="transition-transform duration-300 group-open:rotate-180">
                 <ChevronDown class="w-5 h-5" />
               </span>
             </summary>
-            <div class="mt-4 text-gray-400">
-              <p>{faq.respuesta}</p>
+            <div class="faq-content overflow-hidden transition-all duration-300 ease-in-out">
+              <div class="pt-4 pb-2 text-gray-400">
+                <p>{faq.respuesta}</p>
+              </div>
             </div>
           </details>
         </div>
@@ -51,3 +53,96 @@ const faqs = [
     </div>
   </div>
 </section>
+
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const details = document.querySelectorAll('.faq-item') as NodeListOf<HTMLDetailsElement>;
+    
+    details.forEach((detail) => {
+      // Obtener el contenido y verificar que exista
+      const content = detail.querySelector('.faq-content') as HTMLElement | null;
+      if (!content) return;
+      
+      // Función para actualizar la altura del contenido
+      const updateHeight = (open: boolean) => {
+        try {
+          if (open) {
+            // Primero establecer altura a 0 y luego animarla
+            content.style.height = '0px';
+            // Forzar reflow
+            void content.offsetHeight;
+            // Obtener la altura real del contenido
+            const height = content.scrollHeight;
+            // Establecer la altura para la animación
+            content.style.height = `${height}px`;
+          } else {
+            // Primero establecer la altura actual
+            const height = content.scrollHeight;
+            content.style.height = `${height}px`;
+            // Forzar reflow
+            void content.offsetHeight;
+            // Animar a altura 0
+            content.style.height = '0px';
+          }
+        } catch (error) {
+          console.error('Error al actualizar altura:', error);
+        }
+      };
+      
+      // Inicializar alturas
+      if (detail.open) {
+        content.style.height = `${content.scrollHeight}px`;
+      } else {
+        content.style.height = '0px';
+      }
+      
+      // Manejar eventos de toggle
+      detail.addEventListener('toggle', () => {
+        updateHeight(detail.open);
+      });
+      
+      // Manejar cambios de tamaño de ventana
+      window.addEventListener('resize', () => {
+        if (detail.open) {
+          // Actualizar altura sin animación durante resize
+          content.style.transition = 'none';
+          content.style.height = `${content.scrollHeight}px`;
+          // Restaurar transición después de un pequeño retraso
+          setTimeout(() => {
+            content.style.transition = 'height 300ms ease-in-out';
+          }, 50);
+        }
+      });
+    });
+  });
+</script>
+
+<style>
+  /* Estilos para las animaciones del FAQ */
+  .faq-item {
+    position: relative;
+  }
+  
+  .faq-item summary {
+    padding: 0.5rem 0;
+    position: relative;
+    outline: none;
+  }
+  
+  .faq-item summary::-webkit-details-marker {
+    display: none;
+  }
+  
+  /* Estilo para el contenido */
+  .faq-content {
+    height: 0;
+    overflow: hidden;
+    transition: height 300ms ease-in-out;
+  }
+  
+  /* Mejora la accesibilidad con focus visible */
+  .faq-item summary:focus-visible {
+    outline: 2px solid #ffffff;
+    border-radius: 0.25rem;
+  }
+</style>
