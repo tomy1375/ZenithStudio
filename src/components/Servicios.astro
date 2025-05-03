@@ -1,0 +1,67 @@
+---
+import Layout from '../components/icons/Layout.astro';
+import Code from '../components/icons/Code.astro';
+import ShoppingBag from '../components/icons/ShoppingBag.astro';
+import BarChart from '../components/icons/BarChart.astro';
+import Search from '../components/icons/Search.astro';
+import RefreshCw from '../components/icons/RefreshCw.astro';
+
+const servicios = [
+  {
+    icon: 'Layout',
+    title: 'Diseño Web',
+    description: 'Creamos sitios web atractivos, funcionales y optimizados para todos los dispositivos.'
+  },
+  {
+    icon: 'Code',
+    title: 'Desarrollo Web',
+    description: 'Implementamos soluciones técnicas avanzadas con las mejores prácticas de programación.'
+  },
+  {
+    icon: 'ShoppingBag',
+    title: 'E-Commerce',
+    description: 'Desarrollamos tiendas online que convierten visitantes en clientes satisfechos.'
+  },
+  {
+    icon: 'BarChart',
+    title: 'Marketing Digital',
+    description: 'Estrategias personalizadas para aumentar tu visibilidad online y atraer clientes potenciales.'
+  },
+  {
+    icon: 'Search',
+    title: 'SEO',
+    description: 'Optimizamos tu sitio para los motores de búsqueda y mejoramos tu posicionamiento.'
+  },
+  {
+    icon: 'RefreshCw',
+    title: 'Mantenimiento',
+    description: 'Servicio continuo para mantener tu sitio actualizado, seguro y funcionando perfectamente.'
+  }
+];
+---
+
+<section id="servicios" class="section-padding bg-zinc-900 dark:bg-zinc-900">
+  <div class="container">
+    <h2 class="section-title text-white">Nuestros Servicios</h2>
+    <p class="text-center text-gray-400 dark:text-gray-400 max-w-2xl mx-auto mb-12">
+      Ofrecemos soluciones digitales completas para ayudarte a alcanzar tus objetivos de negocio.
+    </p>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+      {servicios.map(servicio => (
+        <div class="bg-zinc-800 dark:bg-zinc-800 p-6 rounded-xl hover:bg-zinc-800/80 dark:hover:bg-zinc-800/80 transition-colors">
+          <div class="bg-white/10 dark:bg-white/10 w-12 h-12 rounded-lg flex items-center justify-center mb-4">
+            {servicio.icon === 'Layout' && <Layout class="w-6 h-6" />}
+            {servicio.icon === 'Code' && <Code class="w-6 h-6" />}
+            {servicio.icon === 'ShoppingBag' && <ShoppingBag class="w-6 h-6" />}
+            {servicio.icon === 'BarChart' && <BarChart class="w-6 h-6" />}
+            {servicio.icon === 'Search' && <Search class="w-6 h-6" />}
+            {servicio.icon === 'RefreshCw' && <RefreshCw class="w-6 h-6" />}
+          </div>
+          <h3 class="text-xl font-semibold mb-2 text-white">{servicio.title}</h3>
+          <p class="text-gray-400 dark:text-gray-400">{servicio.description}</p>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>

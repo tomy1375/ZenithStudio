@@ -1,0 +1,68 @@
+---
+const proyectos = [
+  {
+    titulo: 'E-commerce de Moda',
+    descripcion: 'Tienda online completa con pasarela de pagos y gestión de inventario.',
+    imagen: '/placeholder.svg?height=400&width=600&query=modern fashion ecommerce website',
+    categoria: 'E-commerce',
+    url: '#'
+  },
+  {
+    titulo: 'Portal Inmobiliario',
+    descripcion: 'Plataforma para búsqueda y gestión de propiedades inmobiliarias.',
+    imagen: '/placeholder.svg?height=400&width=600&query=real estate property listing website',
+    categoria: 'Web App',
+    url: '#'
+  },
+  {
+    titulo: 'Blog de Viajes',
+    descripcion: 'Blog con sistema de gestión de contenidos personalizado.',
+    imagen: '/placeholder.svg?height=400&width=600&query=travel blog website with mountains',
+    categoria: 'Blog',
+    url: '#'
+  },
+  {
+    titulo: 'Dashboard Analítico',
+    descripcion: 'Panel de control para visualización de datos empresariales.',
+    imagen: '/placeholder.svg?height=400&width=600&query=business analytics dashboard dark theme',
+    categoria: 'Dashboard',
+    url: '#'
+  }
+];
+---
+
+<section class="section-padding bg-zinc-900 dark:bg-zinc-900">
+  <div class="container">
+    <h2 class="section-title text-white">Proyectos Destacados</h2>
+    <p class="text-center text-gray-400 dark:text-gray-400 max-w-2xl mx-auto mb-12">
+      Algunos de los proyectos que hemos desarrollado para nuestros clientes.
+    </p>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+      {proyectos.map(proyecto => (
+        <a href={proyecto.url} class="group">
+          <div class="overflow-hidden rounded-xl bg-zinc-800 dark:bg-zinc-800 hover:bg-zinc-800/80 dark:hover:bg-zinc-800/80 transition-colors">
+            <div class="overflow-hidden">
+              <img 
+                src={proyecto.imagen || "/placeholder.svg"} 
+                alt={proyecto.titulo} 
+                class="w-full h-64 object-cover transition-transform duration-500 group-hover:scale-105"
+              />
+            </div>
+            <div class="p-6">
+              <div class="flex justify-between items-center mb-2">
+                <h3 class="text-xl font-semibold text-white">{proyecto.titulo}</h3>
+                <span class="text-xs bg-white/10 dark:bg-white/10 px-3 py-1 rounded-full text-white">{proyecto.categoria}</span>
+              </div>
+              <p class="text-gray-400 dark:text-gray-400">{proyecto.descripcion}</p>
+            </div>
+          </div>
+        </a>
+      ))}
+    </div>
+
+    <div class="text-center mt-12">
+      <a href="#contacto" class="btn-outline">Ver más proyectos</a>
+    </div>
+  </div>
+</section>

@@ -1,0 +1,194 @@
+<!-- CÓDIGO MODIFICADO -->
+<script is:inline>
+  // Verificar si GSAP ya está cargado
+  if (typeof gsap === 'undefined') {
+    // Cargar GSAP desde CDN si no está disponible
+    const loadScript = (src) => {
+      return new Promise((resolve, reject) => {
+        const script = document.createElement('script');
+        script.src = src;
+        script.onload = resolve;
+        script.onerror = reject;
+        document.head.appendChild(script);
+      });
+    };
+
+    // Cargar GSAP y plugins
+    Promise.all([
+      loadScript('https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js'),
+      loadScript('https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js')
+    ]).then(() => {
+      console.log('GSAP cargado desde CDN');
+      // Iniciar animaciones después de cargar GSAP
+      setTimeout(initAnimations, 100);
+    }).catch(err => {
+      console.error('Error al cargar GSAP:', err);
+    });
+  } else {
+    // Si GSAP ya está disponible, iniciar animaciones
+    setTimeout(initAnimations, 100);
+  }
+
+  function initAnimations() {
+    console.log('Inicializando animaciones GSAP');
+    
+    // Registrar plugins
+    gsap.registerPlugin(ScrollTrigger);
+    
+    // Animación de la navbar
+    const navbarTl = gsap.timeline();
+    
+    // Logo aparece primero
+    navbarTl.from('.gsap-logo', {
+      opacity: 0,
+      y: -50,
+      duration: 0.8,
+      ease: 'power3.out'
+    });
+    
+    // Navegación aparece desde la izquierda
+    navbarTl.from('.gsap-nav', {
+      opacity: 0,
+      x: -30,
+      duration: 0.6,
+      ease: 'power2.out'
+    }, '-=0.4');
+    
+    // Botones aparecen desde la derecha
+    navbarTl.from('.gsap-buttons, .gsap-mobile-buttons', {
+      opacity: 0,
+      x: 30,
+      duration: 0.6,
+      ease: 'power2.out'
+    }, '-=0.6');
+    
+    // Animación del hero
+    const heroTl = gsap.timeline({
+      delay: 0.2
+    });
+    
+    // Badge aparece primero
+    heroTl.from('.gsap-hero-badge', {
+      opacity: 0,
+      y: 20,
+      duration: 0.8,
+      ease: 'back.out(1.7)'
+    });
+    
+    // Título aparece con efecto de split
+    heroTl.from('.gsap-hero-title', {
+      opacity: 0,
+      y: 30,
+      duration: 1,
+      ease: 'power3.out'
+    }, '-=0.4');
+    
+    // Texto aparece
+    heroTl.from('.gsap-hero-text', {
+      opacity: 0,
+      y: 20,
+      duration: 0.8,
+      ease: 'power2.out'
+    }, '-=0.6');
+    
+    // Botón aparece
+    heroTl.from('.gsap-hero-button', {
+      opacity: 0,
+      y: 20,
+      scale: 0.9,
+      duration: 0.8,
+      ease: 'back.out(1.7)'
+    }, '-=0.4');
+    
+    // Flecha aparece con rebote
+    heroTl.from('.gsap-hero-arrow', {
+      opacity: 0,
+      y: -20,
+      duration: 0.8,
+      ease: 'bounce.out'
+    }, '-=0.2');
+    
+    // Animación del botón de WhatsApp
+    gsap.to('.gsap-whatsapp', {
+      opacity: 1,
+      scale: 1,
+      duration: 1,
+      ease: 'elastic.out(1, 0.5)',
+      delay: 1.5
+    });
+    
+    // Animaciones al hacer scroll
+    
+    // Animación para secciones al hacer scroll
+    const sections = document.querySelectorAll("section:not(#top)");
+    sections.forEach(section => {
+      gsap.from(section.querySelectorAll("h2, p, .grid > *"), {
+        scrollTrigger: {
+          trigger: section,
+          start: "top 80%",
+        },
+        opacity: 0,
+        y: 30,
+        stagger: 0.2,
+        duration: 0.8,
+        ease: "power2.out"
+      });
+    });
+    
+    // Función para actualizar el navbar según el tema actual
+    function updateNavbarStyle(scrolled = false) {
+      const header = document.querySelector("header");
+      const isDark = document.documentElement.classList.contains('dark');
+      
+      if (!header) return;
+      
+      // Detener cualquier animación en curso
+      gsap.killTweensOf(header);
+      
+      if (isDark) {
+        gsap.to(header, {
+          backgroundColor: scrolled ? "rgba(0,0,0,0.9)" : "rgba(0,0,0,0.8)",
+          backdropFilter: scrolled ? "blur(10px)" : "blur(5px)",
+          boxShadow: scrolled ? "0 4px 20px rgba(0,0,0,0.2)" : "none",
+          duration: 0.3,
+          overwrite: true
+        });
+      } else {
+        gsap.to(header, {
+          backgroundColor: scrolled ? "rgba(255,255,255,0.9)" : "rgba(255,255,255,0.8)",
+          backdropFilter: scrolled ? "blur(10px)" : "blur(5px)",
+          boxShadow: scrolled ? "0 4px 20px rgba(0,0,0,0.1)" : "none",
+          duration: 0.3,
+          overwrite: true
+        });
+      }
+    }
+    
+    // Animación para el navbar al hacer scroll
+    ScrollTrigger.create({
+      start: 10,
+      end: 11,
+      onEnter: () => {
+        updateNavbarStyle(true);
+      },
+      onLeaveBack: () => {
+        updateNavbarStyle(false);
+      }
+    });
+    
+    // Escuchar cambios de tema
+    document.addEventListener('themeChanged', () => {
+      // Actualizar el navbar según la posición actual del scroll
+      updateNavbarStyle(window.scrollY > 10);
+    });
+    
+    console.log('Animaciones GSAP inicializadas');
+  }
+  
+  // Crear un evento personalizado para el cambio de tema
+  if (typeof window !== 'undefined') {
+    window.dispatchThemeChange = function() {
+      document.dispatchEvent(new CustomEvent('themeChanged'));
+    };
+  }
+</script>

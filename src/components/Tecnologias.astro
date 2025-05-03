@@ -1,0 +1,92 @@
+---
+import HTML from '../components/icons/tech/HTML.astro';
+import CSS from '../components/icons/tech/CSS.astro';
+import JavaScript from '../components/icons/tech/JavaScript.astro';
+import TypeScript from '../components/icons/tech/TypeScript.astro';
+import React from '../components/icons/tech/React.astro';
+import NodeJS from '../components/icons/tech/NodeJS.astro';
+import Tailwind from '../components/icons/tech/Tailwind.astro';
+import WordPress from '../components/icons/tech/WordPress.astro';
+import WooCommerce from '../components/icons/tech/WooCommerce.astro';
+import Neon from '../components/icons/tech/Neon.astro';
+
+const tecnologias = [
+  {
+    nombre: 'HTML5',
+    icon: HTML
+  },
+  {
+    nombre: 'CSS3',
+    icon: CSS
+  },
+  {
+    nombre: 'JavaScript',
+    icon: JavaScript
+  },
+  {
+    nombre: 'TypeScript',
+    icon: TypeScript
+  },
+  {
+    nombre: 'React',
+    icon: React
+  },
+  {
+    nombre: 'Node.js',
+    icon: NodeJS
+  },
+  {
+    nombre: 'Tailwind CSS',
+    icon: Tailwind
+  },
+  {
+    nombre: 'WordPress',
+    icon: WordPress
+  },
+  {
+    nombre: 'Woo Commerce',
+    icon: WooCommerce
+  },
+  {
+    nombre: 'Neon',
+    icon: Neon
+  }
+];
+---
+
+<section id="tecnologias" class="section-padding">
+  <div class="container">
+    <h2 class="section-title">Tecnologías</h2>
+    <p class="text-center text-gray-400 max-w-2xl mx-auto mb-12">
+      Trabajamos con las tecnologías más modernas y eficientes para crear soluciones robustas y escalables.
+    </p>
+
+    <div class="grid grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-8">
+      {tecnologias.map((tech, index) => {
+        const Icon = tech.icon;
+        return (
+          <div class="tech-item flex flex-col items-center justify-center p-4 bg-zinc-900 rounded-xl hover:bg-zinc-800 transition-all">
+            <Icon class="w-12 h-12 mb-3" />
+            <span class="text-sm text-center text-white">{tech.nombre}</span>
+          </div>
+        );
+      })}
+    </div>
+  </div>
+</section>
+
+<script>
+  // Script para asegurar que las tecnologías se muestren correctamente
+  document.addEventListener('DOMContentLoaded', () => {
+    console.log("Verificando sección de tecnologías...");
+    const techItems = document.querySelectorAll('.tech-item');
+    console.log("Elementos de tecnología encontrados:", techItems.length);
+    
+    // Forzar visibilidad usando casting para evitar errores de TypeScript
+    techItems.forEach(item => {
+      (item as HTMLElement).style.opacity = "1";
+      (item as HTMLElement).style.visibility = "visible";
+      (item as HTMLElement).style.display = "flex";
+    });
+  });
+</script>

@@ -1,0 +1,36 @@
+---
+import ArrowDown from '../components/icons/ArrowDown.astro';
+---
+
+<!-- Añadido id="top" para el enlace del logo -->
+<section id="top" class="min-h-screen flex items-center justify-center pt-20 pb-10">
+  <div class="container mx-auto px-4 flex flex-col items-center justify-center text-center">
+    <div class="max-w-3xl mx-auto flex flex-col items-center gap-8 gsap-hero">
+      <div class="bg-zinc-100/20 dark:bg-black/30 border border-zinc-300/30 dark:border-purple-500/30 text-zinc-900 dark:text-white px-5 py-2 rounded-full text-sm inline-block backdrop-blur-sm transition-colors duration-500 gsap-hero-badge">
+        Diseño Web & Marketing Digital
+      </div>
+
+      <h1 class="text-5xl md:text-7xl font-bold leading-tight gsap-hero-title">
+        Transformamos ideas
+        <br />
+        en realidades digitales
+      </h1>
+
+      <p class="text-zinc-700 dark:text-gray-400 text-lg max-w-2xl transition-colors duration-500 gsap-hero-text">
+        Diseñamos experiencias digitales personalizadas que combinan diseño, funcionalidad y estrategia, ayudando a
+        marcas y emprendedores a destacar en el mundo digital.
+      </p>
+
+      <a
+        href="#servicios"
+        class="bg-zinc-900 text-white dark:bg-white dark:text-black px-8 py-3 rounded-full text-sm hover:bg-zinc-800 dark:hover:bg-gray-200 transition-colors mt-4 gsap-hero-button"
+      >
+        Descubrí lo que ofrecemos
+      </a>
+    </div>
+
+    <a href="#servicios" class="absolute bottom-3 animate-bounce gsap-hero-arrow">
+      <ArrowDown class="h-6 w-6 " />
+    </a>
+  </div>
+</section>

@@ -1,0 +1,53 @@
+---
+import ChevronDown from '../components/icons/ChevronDown.astro';
+
+const faqs = [
+  {
+    pregunta: '¿Cuánto tiempo toma desarrollar un sitio web?',
+    respuesta: 'El tiempo de desarrollo varía según la complejidad del proyecto. Un sitio web básico puede estar listo en 2-3 semanas, mientras que proyectos más complejos como e-commerce o aplicaciones web pueden tomar de 1 a 3 meses.'
+  },
+  {
+    pregunta: '¿Qué información necesitas para comenzar mi proyecto?',
+    respuesta: 'Para comenzar, necesitamos entender tus objetivos de negocio, público objetivo, preferencias de diseño y funcionalidades requeridas. También es útil tener ejemplos de sitios que te gusten y cualquier material como logos, textos e imágenes que quieras incluir.'
+  },
+  {
+    pregunta: '¿Ofrecen mantenimiento después de finalizar el proyecto?',
+    respuesta: 'Sí, ofrecemos planes de mantenimiento mensual que incluyen actualizaciones de seguridad, respaldos, correcciones de errores y pequeñas modificaciones. También podemos capacitar a tu equipo para que gestione el contenido del sitio.'
+  },
+  {
+    pregunta: '¿Cómo funciona el proceso de pago?',
+    respuesta: 'Generalmente solicitamos un 50% de anticipo para comenzar el proyecto y el 50% restante al finalizar. Para proyectos más grandes, podemos establecer un calendario de pagos por etapas completadas.'
+  },
+  {
+    pregunta: '¿Puedo actualizar mi sitio web por mi cuenta?',
+    respuesta: 'Sí, desarrollamos sitios con sistemas de gestión de contenido intuitivos que te permiten actualizar textos, imágenes y otros contenidos sin conocimientos técnicos. Además, proporcionamos capacitación para que puedas gestionar tu sitio con confianza.'
+  }
+];
+---
+
+<section id="faq" class="section-padding">
+  <div class="container">
+    <h2 class="section-title">Preguntas Frecuentes</h2>
+    <p class="text-center text-gray-400 max-w-2xl mx-auto mb-12">
+      Respuestas a las dudas más comunes sobre nuestros servicios.
+    </p>
+
+    <div class="max-w-3xl mx-auto">
+      {faqs.map((faq, index) => (
+        <div class="mb-6 border-b border-zinc-800 pb-6 last:border-0">
+          <details class="group">
+            <summary class="flex justify-between items-center cursor-pointer list-none">
+              <h3 class="text-xl font-medium">{faq.pregunta}</h3>
+              <span class="transition-transform duration-300 group-open:rotate-180">
+                <ChevronDown class="w-5 h-5" />
+              </span>
+            </summary>
+            <div class="mt-4 text-gray-400">
+              <p>{faq.respuesta}</p>
+            </div>
+          </details>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>

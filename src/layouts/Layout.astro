@@ -1,22 +1,92 @@
+---
+import { ViewTransitions } from 'astro:transitions';
+import AnimationLoader from '../components/AnimationLoader.astro';
+
+interface Props {
+  title: string;
+}
+
+const { title } = Astro.props;
+---
+
 <!doctype html>
-<html lang="en">
-	<head>
-		<meta charset="UTF-8" />
-		<meta name="viewport" content="width=device-width" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<meta name="generator" content={Astro.generator} />
-		<title>Astro Basics</title>
-	</head>
-	<body>
-		<slot />
-	</body>
+<html lang="es" class="scroll-smooth">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="description" content="Transformamos ideas en realidades digitales. Servicios de diseño web y desarrollo." />
+    <meta name="viewport" content="width=device-width" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.png" />
+    <meta name="generator" content={Astro.generator} />
+    <title>{title}</title>
+    <ViewTransitions />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Script para inicializar el tema antes de que se cargue la página -->
+    <script is:inline>
+      // Aplicar tema guardado inmediatamente para evitar parpadeo
+      const savedTheme = localStorage.getItem('theme');
+      
+      // Por defecto, usar modo oscuro
+      if (savedTheme === 'light') {
+        document.documentElement.classList.remove('dark');
+      } else {
+        document.documentElement.classList.add('dark');
+      }
+      
+      console.log('Tema inicial aplicado:', savedTheme || 'dark (por defecto)');
+    </script>
+  </head>
+  <body class="bg-white dark:bg-black transition-colors duration-500">
+    <!-- Fondo con gradiente radial - Solo visible en modo oscuro -->
+    <div class="fixed inset-0 -z-10 h-full w-full items-center px-5 py-24 opacity-0 dark:opacity-100 transition-opacity duration-500 [background:radial-gradient(125%_125%_at_50%_10%,#000_40%,#63e_100%)]"></div>
+    
+    <slot />
+    
+    <!-- Script para verificar que el DOM se carga correctamente -->
+    <script is:inline>
+      document.addEventListener('DOMContentLoaded', () => {
+        console.log('DOM completamente cargado');
+      });
+    </script>
+
+    <!-- Cargar el componente de animaciones -->
+    <AnimationLoader />
+  </body>
 </html>
 
-<style>
-	html,
-	body {
-		margin: 0;
-		width: 100%;
-		height: 100%;
-	}
+<style is:global>
+  @tailwind base;
+  @tailwind components;
+  @tailwind utilities;
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    font-family: 'Inter', sans-serif;
+    @apply text-zinc-900 dark:text-white;
+  }
+
+  .container {
+    @apply mx-auto px-4 md:px-6 max-w-7xl;
+  }
+
+  .section-padding {
+    @apply py-16 md:py-24;
+  }
+
+  .section-title {
+    @apply text-3xl md:text-4xl font-bold mb-8 text-center;
+  }
+
+  .btn-primary {
+    @apply bg-zinc-900 text-white dark:bg-white dark:text-black px-6 py-3 rounded-full font-medium hover:bg-zinc-800 dark:hover:bg-gray-200 transition-colors;
+  }
+
+  .btn-outline {
+    @apply border border-zinc-900 text-zinc-900 dark:border-white dark:text-white px-6 py-3 rounded-full font-medium hover:bg-zinc-100 dark:hover:bg-white/10 transition-colors;
+  }
 </style>

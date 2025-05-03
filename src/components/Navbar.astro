@@ -1,0 +1,387 @@
+---
+import Menu from '../components/icons/Menu.astro';
+import X from '../components/icons/X.astro';
+import Logo from '../components/icons/Logo.astro';
+import HomeIcon from '../components/icons/nav/HomeIcon.astro';
+import ServicesIcon from '../components/icons/nav/ServicesIcon.astro';
+import TechIcon from '../components/icons/nav/TechIcon.astro';
+import FaqIcon from '../components/icons/nav/FaqIcon.astro';
+import ContactIcon from '../components/icons/nav/ContactIcon.astro';
+
+const navItems = [
+  { href: "#top", icon: HomeIcon, text: "Inicio" },
+  { href: "#servicios", icon: ServicesIcon, text: "Servicios" },
+  { href: "#tecnologias", icon: TechIcon, text: "Tecnologías" },
+  { href: "#faq", icon: FaqIcon, text: "FAQ" },
+  { href: "#contacto", icon: ContactIcon, text: "Contacto" },
+];
+---
+
+<header class="fixed w-full top-0 z-50 bg-white/80 dark:bg-black/80 backdrop-blur-md transition-colors duration-500">
+  <div class="container mx-auto px-4 py-5 flex items-center justify-between">
+    <!-- Logo centrado en móvil, a la izquierda en desktop -->
+    <a href="#top" class="smooth-scroll gsap-logo">
+      <Logo class="h-12 w-auto" />
+    </a>
+
+    <!-- Menú de navegación para desktop con líneas animadas -->
+    <nav class="hidden md:flex items-center gap-8 gsap-nav">
+      <a href="#servicios" class="relative group hover:text-zinc-600 dark:hover:text-gray-300 transition-colors">
+        Servicios
+        <div class="absolute -bottom-1 left-0 w-full h-0.5 bg-zinc-900 dark:bg-white scale-x-0 group-hover:scale-x-100 transition-transform origin-left duration-300"></div>
+      </a>
+      <a href="#tecnologias" class="relative group hover:text-zinc-600 dark:hover:text-gray-300 transition-colors">
+        Tecnologías
+        <div class="absolute -bottom-1 left-0 w-full h-0.5 bg-zinc-900 dark:bg-white scale-x-0 group-hover:scale-x-100 transition-transform origin-left duration-300"></div>
+      </a>
+      <a href="#faq" class="relative group hover:text-zinc-600 dark:hover:text-gray-300 transition-colors">
+        FAQ
+        <div class="absolute -bottom-1 left-0 w-full h-0.5 bg-zinc-900 dark:bg-white scale-x-0 group-hover:scale-x-100 transition-transform origin-left duration-300"></div>
+      </a>
+      <a href="#contacto" class="relative group hover:text-zinc-600 dark:hover:text-gray-300 transition-colors">
+        Contacto
+        <div class="absolute -bottom-1 left-0 w-full h-0.5 bg-zinc-900 dark:bg-white scale-x-0 group-hover:scale-x-100 transition-transform origin-left duration-300"></div>
+      </a>
+    </nav>
+
+    <!-- Botones a la derecha -->
+    <div class="hidden md:flex items-center gap-4 gsap-buttons">
+      <!-- Botón de tema -->
+      <button 
+        id="theme-toggle-desktop" 
+        class="p-2.5 rounded-full bg-zinc-100 hover:bg-zinc-200 dark:bg-zinc-800/50 dark:hover:bg-zinc-700/50 transition-all duration-300 shadow-sm border border-zinc-200 dark:border-zinc-700/50" 
+        aria-label="Cambiar tema"
+      >
+        <!-- Icono Sol (visible en modo oscuro) -->
+        <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 hidden dark:block" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="12" cy="12" r="5"></circle>
+          <line x1="12" y1="1" x2="12" y2="3"></line>
+          <line x1="12" y1="21" x2="12" y2="23"></line>
+          <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+          <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+          <line x1="1" y1="12" x2="3" y2="12"></line>
+          <line x1="21" y1="12" x2="23" y2="12"></line>
+          <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+          <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+        </svg>
+        
+        <!-- Icono Luna (visible en modo claro) -->
+        <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 block dark:hidden" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+        </svg>
+      </button>
+      
+      <!-- Botón de contacto -->
+      <a
+        href="https://wa.me/1234567890?text=Hola,%20me%20interesa%20conocer%20más%20sobre%20tus%20servicios"
+        target="_blank"
+        rel="noopener noreferrer"
+        class="bg-zinc-900 text-white dark:bg-white dark:text-black px-5 py-2 rounded-full text-sm hover:bg-zinc-800 dark:hover:bg-gray-200 transition-colors"
+      >
+        Contactar
+      </a>
+    </div>
+
+    <!-- Botón de menú móvil -->
+    <div class="md:hidden flex items-center gap-4 gsap-mobile-buttons">
+      <!-- Botón de tema para móvil -->
+      <button 
+        id="theme-toggle-mobile" 
+        class="p-2.5 rounded-full bg-zinc-100 hover:bg-zinc-200 dark:bg-zinc-800/50 dark:hover:bg-zinc-700/50 transition-all duration-300 shadow-sm border border-zinc-200 dark:border-zinc-700/50" 
+        aria-label="Cambiar tema"
+      >
+        <!-- Icono Sol (visible en modo oscuro) -->
+        <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 hidden dark:block" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="12" cy="12" r="5"></circle>
+          <line x1="12" y1="1" x2="12" y2="3"></line>
+          <line x1="12" y1="21" x2="12" y2="23"></line>
+          <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+          <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+          <line x1="1" y1="12" x2="3" y2="12"></line>
+          <line x1="21" y1="12" x2="23" y2="12"></line>
+          <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+          <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+        </svg>
+        
+        <!-- Icono Luna (visible en modo claro) -->
+        <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 block dark:hidden" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+        </svg>
+      </button>
+      
+      <button id="menu-toggle" class="text-zinc-900 dark:text-white p-2">
+        <Menu class="w-6 h-6" />
+      </button>
+    </div>
+  </div>
+
+  <!-- Menú móvil desplegable con animaciones mejoradas -->
+  <div id="mobile-menu" class="fixed inset-0 bg-white/95 dark:bg-black/95 z-50 flex-col justify-center items-center hidden transition-all duration-300 mt-72">
+    <button id="close-menu" class="absolute top-5 right-5 text-zinc-900 dark:text-white p-2">
+      <X class="w-6 h-6" />
+    </button>
+    
+    <!-- Botón de tema en el menú móvil desplegado -->
+    <div class="absolute top-5 left-5">
+      <button 
+        id="theme-toggle-menu" 
+        class="p-3 rounded-full bg-zinc-100 hover:bg-zinc-200 dark:bg-zinc-800 dark:hover:bg-zinc-700 transition-all duration-300 shadow-md border border-zinc-200 dark:border-zinc-700" 
+        aria-label="Cambiar tema"
+      >
+        <!-- Icono Sol (visible en modo oscuro) -->
+        <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 hidden dark:block text-zinc-900 dark:text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="12" cy="12" r="5"></circle>
+          <line x1="12" y1="1" x2="12" y2="3"></line>
+          <line x1="12" y1="21" x2="12" y2="23"></line>
+          <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+          <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+          <line x1="1" y1="12" x2="3" y2="12"></line>
+          <line x1="21" y1="12" x2="23" y2="12"></line>
+          <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+          <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+        </svg>
+        
+        <!-- Icono Luna (visible en modo claro) -->
+        <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 block dark:hidden text-zinc-900 dark:text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+        </svg>
+      </button>
+    </div>
+    
+    <!-- Contenedor con fondo para los enlaces del menú -->
+    <div id="menu-content" class="w-full max-w-sm bg-zinc-100/90 dark:bg-zinc-800/90 p-8 rounded-xl shadow-lg transform scale-95 opacity-0 transition-all duration-300">
+      <nav class="flex flex-col items-center gap-6 text-xl text-zinc-900 dark:text-white">
+        {navItems.map((item) => (
+          <a href={item.href} class="w-full py-3 flex items-center justify-center hover:bg-zinc-200 dark:hover:bg-zinc-700 rounded-lg transition-colors menu-link">
+            <item.icon class="w-5 h-5 mr-3" />
+            {item.text}
+          </a>
+        ))}
+        <a
+          href="https://wa.me/+543884326541?text=Hola,%20me%20interesa%20conocer%20más%20sobre%20tus%20servicios"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="w-full mt-4 bg-zinc-900 text-white dark:bg-white dark:text-black px-6 py-3 text-center hover:bg-zinc-800 dark:hover:bg-gray-200 transition-colors shadow-md menu-link flex items-center justify-center rounded-full"
+        >
+          <ContactIcon class="w-5 h-5 mr-3 " />
+          Contactar por WhatsApp
+        </a>
+      </nav>
+    </div>
+  </div>
+</header>
+
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    // Manejo del menú móvil
+    const menuToggle = document.getElementById('menu-toggle');
+    const closeMenu = document.getElementById('close-menu');
+    const mobileMenu = document.getElementById('mobile-menu');
+    const menuContent = document.getElementById('menu-content');
+    const mobileLinks = document.querySelectorAll('.menu-link');
+
+    // Función para abrir el menú con animación
+    function openMenu() {
+      // Verificar que los elementos existen antes de manipularlos
+      if (!mobileMenu || !menuContent) return;
+      
+      // Mostrar el contenedor del menú
+      mobileMenu.classList.remove('hidden');
+      mobileMenu.classList.add('flex');
+      document.body.style.overflow = 'hidden';
+      
+      // Pequeño retraso para que la transición funcione
+      setTimeout(() => {
+        // Animar el fondo (fade in)
+        mobileMenu.classList.add('bg-visible');
+        
+        // Animar el contenido (scale up + fade in)
+        menuContent.classList.remove('scale-95', 'opacity-0');
+        menuContent.classList.add('scale-100', 'opacity-100');
+      }, 10);
+    }
+    
+    // Función para cerrar el menú con animación
+    function closeMenuWithAnimation() {
+      // Verificar que los elementos existen antes de manipularlos
+      if (!mobileMenu || !menuContent) return;
+      
+      // Animar el fondo (fade out)
+      mobileMenu.classList.remove('bg-visible');
+      
+      // Animar el contenido (scale down + fade out)
+      menuContent.classList.remove('scale-100', 'opacity-100');
+      menuContent.classList.add('scale-95', 'opacity-0');
+      
+      // Esperar a que termine la animación antes de ocultar
+      setTimeout(() => {
+        mobileMenu.classList.remove('flex');
+        mobileMenu.classList.add('hidden');
+        document.body.style.overflow = '';
+      }, 300);
+    }
+
+    // Eventos para abrir/cerrar el menú
+    if (menuToggle) {
+      menuToggle.addEventListener('click', openMenu);
+    }
+    
+    if (closeMenu) {
+      closeMenu.addEventListener('click', closeMenuWithAnimation);
+    }
+
+    // Cerrar el menú al hacer clic en un enlace
+    mobileLinks.forEach(link => {
+      link.addEventListener('click', closeMenuWithAnimation);
+    });
+
+    // Función para cambiar el tema
+    function toggleTheme(e) {
+      // Detener la propagación del evento para evitar conflictos
+      e.stopPropagation();
+      
+      console.log('Botón de tema clickeado');
+      
+      if (document.documentElement.classList.contains('dark')) {
+        document.documentElement.classList.remove('dark');
+        localStorage.setItem('theme', 'light');
+        console.log('Cambiado a tema claro');
+      } else {
+        document.documentElement.classList.add('dark');
+        localStorage.setItem('theme', 'dark');
+        console.log('Cambiado a tema oscuro');
+      }
+      
+      // Añadir efecto de pulsación al botón
+      const button = e.currentTarget;
+      button.classList.add('scale-90');
+      setTimeout(() => {
+        button.classList.remove('scale-90');
+      }, 200);
+      
+   // Notificar el cambio de tema - Versión corregida para TypeScript
+   try {
+        // Verificar si la función existe en window de manera segura para TypeScript
+        const win = window as any;
+        if (typeof win.dispatchThemeChange === 'function') {
+          win.dispatchThemeChange();
+        } else {
+          // Fallback si la función no está disponible
+          document.dispatchEvent(new CustomEvent('themeChanged'));
+        }
+      } catch (error) {
+        // Si hay algún error, usar el método de evento personalizado
+        document.dispatchEvent(new CustomEvent('themeChanged'));
+      }
+      
+      // Forzar un reflow para actualizar inmediatamente
+      const header = document.querySelector('header');
+      if (header) {
+        void header.offsetHeight;
+      }
+    }
+
+    // Agregar eventos a los botones de tema
+    const themeToggleMobile = document.getElementById('theme-toggle-mobile');
+    const themeToggleDesktop = document.getElementById('theme-toggle-desktop');
+    const themeToggleMenu = document.getElementById('theme-toggle-menu');
+
+    if (themeToggleMobile) {
+      themeToggleMobile.addEventListener('click', toggleTheme);
+    }
+    
+    if (themeToggleDesktop) {
+      themeToggleDesktop.addEventListener('click', toggleTheme);
+    }
+    
+    if (themeToggleMenu) {
+      themeToggleMenu.addEventListener('click', toggleTheme);
+    }
+    
+    // Manejar el desplazamiento suave para todos los enlaces internos
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function(e) {
+        e.preventDefault();
+        
+        // Si es el enlace del logo, desplazarse al inicio
+        if (this.getAttribute('href') === '#top') {
+          window.scrollTo({
+            top: 0,
+            behavior: 'smooth'
+          });
+        } else {
+          // Para otros enlaces, desplazarse al elemento correspondiente
+          const targetId = this.getAttribute('href');
+          const targetElement = document.querySelector(targetId);
+          
+          if (targetElement) {
+            targetElement.scrollIntoView({
+              behavior: 'smooth'
+            });
+          }
+        }
+      });
+    });
+    
+    console.log('Script de Navbar cargado correctamente');
+  });
+</script>
+
+<style>
+  /* Estilos mejorados para las transiciones del menú */
+  #mobile-menu {
+    transition: background-color 0.4s ease;
+  }
+  
+  #mobile-menu.bg-visible {
+    background-color: rgba(255, 255, 255, 0.95);
+  }
+  
+  .dark #mobile-menu.bg-visible {
+    background-color: rgba(0, 0, 0, 0.95);
+  }
+  
+  #menu-content {
+    transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), 
+                opacity 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+  
+  /* Animación para los enlaces del menú */
+  .menu-link {
+    transition: transform 0.2s ease, background-color 0.3s ease;
+  }
+  
+  .menu-link:hover {
+    transform: translateY(-2px);
+  }
+  
+  .menu-link:active {
+    transform: translateY(0px);
+  }
+  
+  /* Efecto de pulsación para los botones de tema */
+  #theme-toggle-mobile,
+  #theme-toggle-desktop,
+  #theme-toggle-menu {
+    transition: transform 0.2s ease, background-color 0.3s ease, box-shadow 0.3s ease;
+  }
+  
+  #theme-toggle-mobile:active,
+  #theme-toggle-desktop:active,
+  #theme-toggle-menu:active {
+    transform: scale(0.9);
+  }
+  
+  /* Animación para el botón de cerrar */
+  #close-menu {
+    opacity: 0;
+    transform: rotate(-90deg) scale(0.8);
+    transition: opacity 0.3s ease, transform 0.3s ease;
+  }
+  
+  #mobile-menu.bg-visible #close-menu {
+    opacity: 1;
+    transform: rotate(0) scale(1);
+    transition-delay: 0.1s;
+  }
+</style>

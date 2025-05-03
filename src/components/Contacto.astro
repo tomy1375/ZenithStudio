@@ -1,0 +1,115 @@
+---
+import MapPin from '../components/icons/MapPin.astro';
+import Mail from '../components/icons/Mail.astro';
+import Phone from '../components/icons/Phone.astro';
+import Instagram from '../components/icons/Instagram.astro';
+import Twitter from '../components/icons/Twitter.astro';
+import Linkedin from '../components/icons/Linkedin.astro';
+import Github from '../components/icons/Github.astro';
+---
+
+<section id="contacto" class="section-padding bg-zinc-900">
+  <div class="container">
+    <h2 class="section-title">Contacto</h2>
+    <p class="text-center text-gray-400 max-w-2xl mx-auto mb-12">
+      ¿Tenés un proyecto en mente? Contactanos para convertir tus ideas en realidad.
+    </p>
+
+    <div class="grid md:grid-cols-2 gap-12 max-w-4xl mx-auto">
+      <div>
+        <h3 class="text-2xl font-semibold mb-6">Envianos un mensaje</h3>
+        <form class="space-y-4">
+          <div>
+            <label for="nombre" class="block text-sm font-medium mb-1">Nombre</label>
+            <input
+              type="text"
+              id="nombre"
+              name="nombre"
+              class="w-full px-4 py-3 bg-zinc-800 border border-zinc-700 rounded-lg focus:outline-none focus:ring-2 focus:ring-white/50"
+              required
+            />
+          </div>
+          <div>
+            <label for="email" class="block text-sm font-medium mb-1">Email</label>
+            <input
+              type="email"
+              id="email"
+              name="email"
+              class="w-full px-4 py-3 bg-zinc-800 border border-zinc-700 rounded-lg focus:outline-none focus:ring-2 focus:ring-white/50"
+              required
+            />
+          </div>
+          <div>
+            <label for="mensaje" class="block text-sm font-medium mb-1">Mensaje</label>
+            <textarea
+              id="mensaje"
+              name="mensaje"
+              rows="5"
+              class="w-full px-4 py-3 bg-zinc-800 border border-zinc-700 rounded-lg focus:outline-none focus:ring-2 focus:ring-white/50"
+              required
+            ></textarea>
+          </div>
+          <button
+            type="submit"
+            class="w-full bg-white text-black font-medium py-3 px-6 rounded-lg hover:bg-gray-200 transition-colors"
+          >
+            Enviar mensaje
+          </button>
+        </form>
+      </div>
+
+      <div>
+        <h3 class="text-2xl font-semibold mb-6">Información de contacto</h3>
+        <div class="space-y-6">
+          <div class="flex items-start gap-4">
+            <div class="bg-white/10 p-3 rounded-lg">
+              <MapPin class="w-5 h-5" />
+            </div>
+            <div>
+              <h4 class="font-medium">Ubicación</h4>
+              <p class="text-gray-400">Buenos Aires, Argentina</p>
+            </div>
+          </div>
+
+          <div class="flex items-start gap-4">
+            <div class="bg-white/10 p-3 rounded-lg">
+              <Mail class="w-5 h-5" />
+            </div>
+            <div>
+              <h4 class="font-medium">Email</h4>
+              <p class="text-gray-400">contacto@ardian.com</p>
+            </div>
+          </div>
+
+          <div class="flex items-start gap-4">
+            <div class="bg-white/10 p-3 rounded-lg">
+              <Phone class="w-5 h-5" />
+            </div>
+            <div>
+              <h4 class="font-medium">Teléfono</h4>
+              <p class="text-gray-400">+54 11 1234 5678</p>
+            </div>
+          </div>
+
+          <div class="pt-6">
+            <h4 class="font-medium mb-4">Seguinos en redes</h4>
+            <div class="flex gap-4">
+              <a href="#" class="bg-white/10 p-3 rounded-lg hover:bg-white/20 transition-colors">
+                <Instagram class="w-5 h-5" />
+              </a>
+              <a href="#" class="bg-white/10 p-3 rounded-lg hover:bg-white/20 transition-colors">
+                <Twitter class="w-5 h-5" />
+              </a>
+              <a href="#" class="bg-white/10 p-3 rounded-lg hover:bg-white/20 transition-colors">
+                <Linkedin class="w-5 h-5" />
+              </a>
+              <a href="#" class="bg-white/10 p-3 rounded-lg hover:bg-white/20 transition-colors">
+                <Github class="w-5 h-5" />
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
