@@ -6,62 +6,135 @@ import BarChart from '../components/icons/BarChart.astro';
 import Search from '../components/icons/Search.astro';
 import RefreshCw from '../components/icons/RefreshCw.astro';
 
+// Colores para cada servicio
 const servicios = [
   {
     icon: 'Layout',
     title: 'Diseño Web',
-    description: 'Creamos sitios web atractivos, funcionales y optimizados para todos los dispositivos.'
+    description: 'Creamos sitios web atractivos, funcionales y optimizados para todos los dispositivos.',
+    color: 'from-blue-500 to-purple-600',
+    lightColor: 'rgba(99, 102, 241, 0.15)',
+    iconColor: 'text-blue-400'
   },
   {
     icon: 'Code',
     title: 'Desarrollo Web',
-    description: 'Implementamos soluciones técnicas avanzadas con las mejores prácticas de programación.'
+    description: 'Implementamos soluciones técnicas avanzadas con las mejores prácticas de programación.',
+    color: 'from-emerald-500 to-teal-600',
+    lightColor: 'rgba(16, 185, 129, 0.15)',
+    iconColor: 'text-emerald-400'
   },
   {
     icon: 'ShoppingBag',
     title: 'E-Commerce',
-    description: 'Desarrollamos tiendas online que convierten visitantes en clientes satisfechos.'
+    description: 'Desarrollamos tiendas online que convierten visitantes en clientes satisfechos.',
+    color: 'from-pink-500 to-rose-600',
+    lightColor: 'rgba(236, 72, 153, 0.15)',
+    iconColor: 'text-pink-400'
   },
   {
     icon: 'BarChart',
     title: 'Marketing Digital',
-    description: 'Estrategias personalizadas para aumentar tu visibilidad online y atraer clientes potenciales.'
+    description: 'Estrategias personalizadas para aumentar tu visibilidad online y atraer clientes potenciales.',
+    color: 'from-amber-500 to-orange-600',
+    lightColor: 'rgba(245, 158, 11, 0.15)',
+    iconColor: 'text-amber-400'
   },
   {
     icon: 'Search',
     title: 'SEO',
-    description: 'Optimizamos tu sitio para los motores de búsqueda y mejoramos tu posicionamiento.'
+    description: 'Optimizamos tu sitio para los motores de búsqueda y mejoramos tu posicionamiento.',
+    color: 'from-cyan-500 to-blue-600',
+    lightColor: 'rgba(14, 165, 233, 0.15)',
+    iconColor: 'text-cyan-400'
   },
   {
     icon: 'RefreshCw',
     title: 'Mantenimiento',
-    description: 'Servicio continuo para mantener tu sitio actualizado, seguro y funcionando perfectamente.'
+    description: 'Servicio continuo para mantener tu sitio actualizado, seguro y funcionando perfectamente.',
+    color: 'from-violet-500 to-purple-600',
+    lightColor: 'rgba(139, 92, 246, 0.15)',
+    iconColor: 'text-violet-400'
   }
 ];
 ---
 
-<section id="servicios" class="section-padding bg-zinc-900 dark:bg-zinc-900">
-  <div class="container">
-    <h2 class="section-title text-white">Nuestros Servicios</h2>
-    <p class="text-center text-gray-400 dark:text-gray-400 max-w-2xl mx-auto mb-12">
-      Ofrecemos soluciones digitales completas para ayudarte a alcanzar tus objetivos de negocio.
-    </p>
+<section id="servicios" class="section-padding relative overflow-hidden">
+  <!-- Fondo con gradiente y efecto de malla -->
+  <div class="absolute inset-0 bg-gradient-to-br from-zinc-900 via-zinc-900 to-purple-950 z-0"></div>
+  
+  <!-- Elementos decorativos de fondo -->
+  <div class="absolute top-20 left-10 w-72 h-72 bg-purple-600/10 rounded-full blur-3xl"></div>
+  <div class="absolute bottom-20 right-10 w-80 h-80 bg-blue-600/10 rounded-full blur-3xl"></div>
+  
+  <div class="container relative z-10">
+    <div class="text-center mb-16">
+      <span class="inline-block py-1 px-3 rounded-full text-sm font-medium bg-gradient-to-r from-purple-500 to-blue-500 text-white mb-4">Nuestras Soluciones</span>
+      <h2 class="section-title text-white text-4xl md:text-5xl font-bold mb-6">Nuestros Servicios</h2>
+      <p class="text-center text-gray-300 max-w-2xl mx-auto">
+        Ofrecemos soluciones digitales completas para ayudarte a alcanzar tus objetivos de negocio.
+      </p>
+    </div>
 
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
       {servicios.map(servicio => (
-        <div class="bg-zinc-800 dark:bg-zinc-800 p-6 rounded-xl hover:bg-zinc-800/80 dark:hover:bg-zinc-800/80 transition-colors">
-          <div class="bg-white/10 dark:bg-white/10 w-12 h-12 rounded-lg flex items-center justify-center mb-4">
-            {servicio.icon === 'Layout' && <Layout class="w-6 h-6" />}
-            {servicio.icon === 'Code' && <Code class="w-6 h-6" />}
-            {servicio.icon === 'ShoppingBag' && <ShoppingBag class="w-6 h-6" />}
-            {servicio.icon === 'BarChart' && <BarChart class="w-6 h-6" />}
-            {servicio.icon === 'Search' && <Search class="w-6 h-6" />}
-            {servicio.icon === 'RefreshCw' && <RefreshCw class="w-6 h-6" />}
+        <div class="group relative">
+          <!-- Borde con gradiente -->
+          <div class={`absolute -inset-0.5 bg-gradient-to-r ${servicio.color} rounded-2xl opacity-50 group-hover:opacity-100 blur-sm group-hover:blur-md transition-all duration-500`}></div>
+          
+          <div class="relative bg-zinc-900 p-8 rounded-xl h-full flex flex-col transform transition-all duration-500 group-hover:translate-y-[-5px] group-hover:shadow-lg">
+            <!-- Icono con fondo de color -->
+            <div class={`w-16 h-16 rounded-2xl mb-6 flex items-center justify-center ${servicio.iconColor}`} style={`background-color: ${servicio.lightColor}`}>
+              {servicio.icon === 'Layout' && <Layout class="w-8 h-8" />}
+              {servicio.icon === 'Code' && <Code class="w-8 h-8" />}
+              {servicio.icon === 'ShoppingBag' && <ShoppingBag class="w-8 h-8" />}
+              {servicio.icon === 'BarChart' && <BarChart class="w-8 h-8" />}
+              {servicio.icon === 'Search' && <Search class="w-8 h-8" />}
+              {servicio.icon === 'RefreshCw' && <RefreshCw class="w-8 h-8" />}
+            </div>
+            
+            <!-- Título con gradiente de texto -->
+            <h3 class={`text-2xl font-bold mb-4 bg-gradient-to-r ${servicio.color} bg-clip-text text-transparent`}>
+              {servicio.title}
+            </h3>
+            
+            <p class="text-gray-300 flex-grow">{servicio.description}</p>
+            
+            <!-- Botón con efecto hover -->
+            <div class="mt-6">
+              {/* <a href="#contacto" class={`inline-flex items-center text-sm font-medium ${servicio.iconColor} group-hover:underline`}>
+                Saber más
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 ml-2 transform group-hover:translate-x-1 transition-transform" viewBox="0 0 20 20" fill="currentColor">
+                  <path fill-rule="evenodd" d="M10.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L12.586 11H5a1 1 0 110-2h7.586l-2.293-2.293a1 1 0 010-1.414z" clip-rule="evenodd" />
+                </svg>
+              </a> */}
+            </div>
           </div>
-          <h3 class="text-xl font-semibold mb-2 text-white">{servicio.title}</h3>
-          <p class="text-gray-400 dark:text-gray-400">{servicio.description}</p>
         </div>
       ))}
     </div>
+    
+    <!-- CTA al final de la sección -->
+    <div class="mt-16 text-center">
+      <a href="#contacto" class="inline-block py-4 px-8 bg-gradient-to-r from-purple-600 to-blue-600 text-white font-medium rounded-full hover:shadow-lg hover:shadow-purple-500/20 transform hover:-translate-y-1 transition-all duration-300">
+        Consulta por nuestros servicios
+      </a>
+    </div>
   </div>
 </section>
+
+<style>
+  /* Animación sutil para los elementos */
+  @keyframes float {
+    0% { transform: translateY(0px); }
+    50% { transform: translateY(-10px); }
+    100% { transform: translateY(0px); }
+  }
+  
+  /* Efecto de brillo para los bordes */
+  @keyframes pulse {
+    0% { opacity: 0.5; }
+    50% { opacity: 0.8; }
+    100% { opacity: 0.5; }
+  }
+</style>
