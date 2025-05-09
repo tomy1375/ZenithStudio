@@ -4,21 +4,75 @@ import AnimationLoader from '../components/AnimationLoader.astro';
 
 interface Props {
   title: string;
+  description?: string;
+  image?: string;
+  canonicalURL?: string;
 }
 
-const { title } = Astro.props;
+// Valores por defecto y mejoras para SEO
+const { 
+  title, 
+  description = "Transformamos ideas en realidades digitales. Servicios de diseño web y desarrollo profesional para empresas y emprendedores.",
+  image = "/og-image.jpg",
+  canonicalURL = new URL(Astro.url.pathname, "https://zenithstudio.site").toString()
+} = Astro.props;
+
+// Obtener la URL actual para uso en meta tags
+const currentUrl = new URL(Astro.url.pathname, "https://zenithstudio.site").toString();
 ---
 
 <!doctype html>
 <html lang="es" class="scroll-smooth">
   <head>
     <meta charset="UTF-8" />
-    <meta name="description" content="Transformamos ideas en realidades digitales. Servicios de diseño web y desarrollo." />
     <meta name="viewport" content="width=device-width" />
-    <link rel="icon" type="image/svg+xml" href="/logo.png" />
-    <meta name="generator" content={Astro.generator} />
+    
+    <!-- SEO Básico -->
     <title>{title}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonicalURL} />
+    <meta name="robots" content="index, follow" />
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="/logo.png" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+    
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content={currentUrl} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:image" content={new URL(image, "https://zenithstudio.site").toString()} />
+    <meta property="og:locale" content="es_ES" />
+    <meta property="og:site_name" content="Zenith Studio" />
+    
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image" />
+    <meta property="twitter:url" content={currentUrl} />
+    <meta property="twitter:title" content={title} />
+    <meta property="twitter:description" content={description} />
+    <meta property="twitter:image" content={new URL(image, "https://zenithstudio.site").toString()} />
+    
+    <!-- Datos estructurados básicos (Schema.org) -->
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "WebSite",
+        "name": "Zenith Studio",
+        "url": "https://zenithstudio.site/",
+        "description": "Diseño y desarrollo web profesional. Transformamos ideas en experiencias digitales.",
+        "potentialAction": {
+          "@type": "SearchAction",
+          "target": "https://zenithstudio.site/search?q={search_term_string}",
+          "query-input": "required name=search_term_string"
+        }
+      }
+    </script>
+    
+    <meta name="generator" content={Astro.generator} />
     <ViewTransitions />
+    
+    <!-- Fuentes -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
