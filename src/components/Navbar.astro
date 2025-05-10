@@ -305,29 +305,39 @@ const navItems = [
     }
     
     // Manejar el desplazamiento suave para todos los enlaces internos
-    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-      anchor.addEventListener('click', function(e) {
-        e.preventDefault();
-        
-        // Si es el enlace del logo, desplazarse al inicio
-        if (this.getAttribute('href') === '#top') {
-          window.scrollTo({
-            top: 0,
-            behavior: 'smooth'
-          });
-        } else {
-          // Para otros enlaces, desplazarse al elemento correspondiente
-          const targetId = this.getAttribute('href');
-          const targetElement = document.querySelector(targetId);
-          
-          if (targetElement) {
-            targetElement.scrollIntoView({
-              behavior: 'smooth'
-            });
-          }
-        }
+  // Manejar el desplazamiento suave para todos los enlaces internos
+document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+  anchor.addEventListener('click', function(e) {
+    e.preventDefault();
+    
+    // Si es el enlace del logo, desplazarse al inicio
+    if (this.getAttribute('href') === '#top') {
+      window.scrollTo({
+        top: 0,
+        behavior: 'smooth'
       });
-    });
+    } else {
+      // Para otros enlaces, desplazarse al elemento correspondiente
+      const targetId = this.getAttribute('href');
+      const targetElement = document.querySelector(targetId);
+      
+      if (targetElement) {
+        // Obtener la altura de la barra de navegación
+        const navbarHeight = document.querySelector('header')?.offsetHeight || 0;
+        
+        // Calcular la posición de desplazamiento con offset
+        const elementPosition = targetElement.getBoundingClientRect().top + window.pageYOffset;
+        const offsetPosition = elementPosition - navbarHeight - 0; // 20px extra de espacio
+        
+        // Desplazarse a la posición calculada
+        window.scrollTo({
+          top: offsetPosition,
+          behavior: 'smooth'
+        });
+      }
+    }
+  });
+});
     
     console.log('Script de Navbar cargado correctamente');
   });
