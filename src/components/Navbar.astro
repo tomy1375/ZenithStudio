@@ -327,7 +327,7 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
         
         // Calcular la posición de desplazamiento con offset
         const elementPosition = targetElement.getBoundingClientRect().top + window.pageYOffset;
-        const offsetPosition = elementPosition - navbarHeight - 0; // 20px extra de espacio
+        const offsetPosition = elementPosition - navbarHeight - (-30); // 20px extra de espacio
         
         // Desplazarse a la posición calculada
         window.scrollTo({
