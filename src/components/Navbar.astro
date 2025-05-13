@@ -8,12 +8,14 @@ import TechIcon from '../components/icons/nav/TechIcon.astro';
 import FaqIcon from '../components/icons/nav/FaqIcon.astro';
 import ContactIcon from '../components/icons/nav/ContactIcon.astro';
 import ProjectsIcon from './icons/nav/ProjectsIcon.astro';
+import PlanesIcon from './icons/nav/PlanesIcon.astro';
 
 const navItems = [
   { href: "#top", icon: HomeIcon, text: "Inicio" },
   { href: "#servicios", icon: ServicesIcon, text: "Servicios" },
   { href: "#tecnologias", icon: TechIcon, text: "Tecnologías" },
   { href: "#proyectos", icon: ProjectsIcon, text: "Proyectos" },
+  { href: "#planes", icon: PlanesIcon, text: "Planes" },
   { href: "#faq", icon: FaqIcon, text: "FAQ" },
   { href: "#contacto", icon: ContactIcon, text: "Contacto" }
 ];
@@ -28,7 +30,7 @@ const navItems = [
 
     <!-- Menú de navegación para desktop con líneas animadas -->
     <nav class="hidden md:flex items-center gap-8 gsap-nav">
-      <a href="#servicios" class="relative group hover:text-zinc-600 dark:hover:text-gray-300 transition-colors">
+      <a href="#servicios" class="relative group hover:text-zinc-600 dark:hover:text-gray-300 transition-colors ml-20">
         Servicios
         <div class="absolute -bottom-1 left-0 w-full h-0.5 bg-zinc-900 dark:bg-white scale-x-0 group-hover:scale-x-100 transition-transform origin-left duration-300"></div>
       </a>
@@ -46,6 +48,10 @@ const navItems = [
       </a>
       <a href="#contacto" class="relative group hover:text-zinc-600 dark:hover:text-gray-300 transition-colors">
         Contacto
+        <div class="absolute -bottom-1 left-0 w-full h-0.5 bg-zinc-900 dark:bg-white scale-x-0 group-hover:scale-x-100 transition-transform origin-left duration-300"></div>
+      </a>
+         <a href="#planes" class="relative group hover:text-zinc-600 dark:hover:text-gray-300 transition-colors">
+        Planes
         <div class="absolute -bottom-1 left-0 w-full h-0.5 bg-zinc-900 dark:bg-white scale-x-0 group-hover:scale-x-100 transition-transform origin-left duration-300"></div>
       </a>
     </nav>
@@ -304,7 +310,7 @@ const navItems = [
             
             // Calcular la posición de desplazamiento con offset
             const elementPosition = targetElement.getBoundingClientRect().top + window.pageYOffset;
-            const offsetPosition = elementPosition - navbarHeight - 20; // 20px extra de espacio
+            const offsetPosition = elementPosition - navbarHeight - (-5); // 20px extra de espacio
             
             // Desplazarse a la posición calculada
             window.scrollTo({

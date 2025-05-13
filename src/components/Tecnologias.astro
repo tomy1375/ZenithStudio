@@ -67,7 +67,7 @@ const tecnologias = [
 
 <section id="tecnologias" class="section-padding">
   <div class="container">
-    <h2 class="section-title">Tecnologías</h2>
+    <h2 class="section-title text-4xl md:text-5xl">Tecnologías</h2>
     <p class="text-center text-gray-400 max-w-2xl mx-auto mb-12">
       Trabajamos con las tecnologías más modernas y eficientes para crear soluciones robustas y escalables.
     </p>
@@ -76,7 +76,7 @@ const tecnologias = [
       {tecnologias.map((tech, index) => {
         const Icon = tech.icon;
         return (
-          <div class="tech-item flex flex-col items-center justify-center p-4 bg-zinc-900 rounded-xl hover:bg-zinc-800 transition-all">
+          <div class="tech-item flex flex-col items-center justify-center p-4 bg-zinc-500 dark:bg-zinc-900 rounded-xl hover:bg-zinc-800 transition-all">
             <Icon class="w-12 h-12 mb-3" />
             <span class="text-sm text-center text-white">{tech.nombre}</span>
           </div>

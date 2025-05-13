@@ -7,25 +7,25 @@ import Plus from '../components/icons/Plus.astro';
 const planes = [
   {
     nombre: "Plan Base",
-    descripcion: "Pensado para emprendedores o pequeños negocios que necesitan una presencia online sólida y rápida, sin complicaciones.",
+    descripcion: "Pensado para emprendedores o pequeños negocios que buscan un sitio profesional con diseño a medida y armado ágil, sin complicaciones.",
     precio: 220000,
     color: "bg-gradient-to-br from-zinc-50 to-zinc-100 dark:from-zinc-900 dark:to-zinc-800",
     textColor: "text-zinc-900 dark:text-white",
     borderColor: "border-zinc-200 dark:border-zinc-700",
     dotColor: "bg-blue-500",
     caracteristicas: [
-      "Plantilla Premium a elección",
+      "Diseño a medida",
       "Hasta 3 páginas o secciones",
-      "Adaptable a todos los dispositivos",
+      "Responsive (todos los dispositivos)",
       "Formulario de contacto básico",
       "Botón de WhatsApp",
-      "Certificado SSL (sitio seguro)"
+      "Certificado SSL incluido"
     ],
     botonClase: "bg-gradient-to-r from-blue-600 to-blue-500 hover:from-blue-700 hover:to-blue-600"
   },
   {
     nombre: "Plan Profesional",
-    descripcion: "Ideal para marcas o profesionales que buscan diferenciarse con un diseño pensado desde cero y alineado a su identidad.",
+    descripcion: "Pensado para marcas, equipos o profesionales que buscan un sitio más abarcativo, autoadministrable y 100% alineado a su identidad visual.",
     precio: 390000,
     color: "bg-gradient-to-br from-purple-400/90 to-pink-400/90 dark:from-purple-600/90 dark:to-pink-600/90",
     textColor: "text-white",
@@ -34,18 +34,18 @@ const planes = [
     caracteristicas: [
       "Diseño a medida",
       "Hasta 5 páginas o secciones",
-      "Sitio autoadministrable",
-      "Adaptable a todos los dispositivos",
+      "Panel de administración CMS",
+      "Responsive (todos los dispositivos)",
       "Integración con redes sociales",
-      "Certificado SSL (sitio seguro)"
+      "Certificado SSL incluido"
     ],
     destacado: true,
     botonClase: "bg-white text-purple-600 hover:bg-gray-100"
   },
   {
     nombre: "Plan Corporativo",
-    descripcion: "Pensado para empresas o proyectos con una visión clara, que necesitan un sitio profesional, escalable y enfocado en resultados.",
-    precio: 590000,
+    descripcion: "Pensado para empresas que necesitan funcionalidades avanzadas: áreas privadas, gestión de bases de datos y contenido personalizado.",
+    precio: 790000,
     color: "bg-gradient-to-br from-zinc-50 to-zinc-100 dark:from-zinc-900 dark:to-zinc-800",
     textColor: "text-zinc-900 dark:text-white",
     borderColor: "border-zinc-200 dark:border-zinc-700",
@@ -53,14 +53,15 @@ const planes = [
     caracteristicas: [
       "Diseño a medida",
       "Hasta 10 páginas o secciones",
-      "Sitio autoadministrable avanzado",
-      "Optimización SEO avanzada",
-      "Integración con Google Analytics",
-      "Soporte técnico prioritario"
+      "CMS avanzado con roles de usuario",
+      "Área privada / zona de clientes",
+      "Subida y descarga de archivos (planos, documentos)",
+      "Optimización SEO y Analytics"
     ],
     botonClase: "bg-gradient-to-r from-purple-600 to-purple-500 hover:from-purple-700 hover:to-purple-600"
   }
 ];
+
 
 // Función para formatear el precio en pesos argentinos
 const formatearPrecio = (precio) => {
@@ -78,7 +79,7 @@ const formatearPrecio = (precio) => {
   <div class="absolute top-20 left-10 w-72 h-72 bg-blue-500/5 dark:bg-blue-500/10 rounded-full blur-3xl -z-5"></div>
   <div class="absolute bottom-20 right-10 w-80 h-80 bg-purple-500/5 dark:bg-purple-500/10 rounded-full blur-3xl -z-5"></div>
   <div class="container">
-    <h2 class="section-title">Conocé nuestros planes</h2>
+    <h2 class="section-title text-4xl md:text-5xl">Conocé nuestros planes</h2>
     <p class="text-center text-gray-600 dark:text-gray-400 max-w-3xl mx-auto mb-12">
       Ofrecemos distintas soluciones según el tipo de negocio, el alcance del proyecto y tus objetivos. Elegí el plan que mejor se adapte a vos y descubrí todo lo que podemos hacer juntos.
     </p>
@@ -151,7 +152,7 @@ const formatearPrecio = (precio) => {
           <div class="flex-shrink-0 w-8 h-8 rounded-full bg-blue-500/20 dark:bg-blue-500/30 flex items-center justify-center text-blue-600 dark:text-blue-400">
             <span class="text-xs font-bold">i</span>
           </div>
-          <p class="text-sm text-zinc-700 dark:text-zinc-300">La entrega se estima entre 7 y 30 días, ajustándose a las particularidades de cada caso.</p>
+          <p class="text-sm text-zinc-700 dark:text-zinc-300">La entrega se estima entre 14 y 30 días, ajustándose a las particularidades de cada caso.</p>
         </div>
       </div>
     </div>
