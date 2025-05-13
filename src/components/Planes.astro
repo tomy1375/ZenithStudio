@@ -1,0 +1,284 @@
+---
+// Importar íconos necesarios
+import Check from '../components/icons/Check.astro';
+import Plus from '../components/icons/Plus.astro';
+
+// Modificar la definición de los planes para mostrar 6 características directamente
+const planes = [
+  {
+    nombre: "Plan Base",
+    descripcion: "Pensado para emprendedores o pequeños negocios que necesitan una presencia online sólida y rápida, sin complicaciones.",
+    precio: 220000,
+    color: "bg-gradient-to-br from-zinc-50 to-zinc-100 dark:from-zinc-900 dark:to-zinc-800",
+    textColor: "text-zinc-900 dark:text-white",
+    borderColor: "border-zinc-200 dark:border-zinc-700",
+    dotColor: "bg-blue-500",
+    caracteristicas: [
+      "Plantilla Premium a elección",
+      "Hasta 3 páginas o secciones",
+      "Adaptable a todos los dispositivos",
+      "Formulario de contacto básico",
+      "Botón de WhatsApp",
+      "Certificado SSL (sitio seguro)"
+    ],
+    botonClase: "bg-gradient-to-r from-blue-600 to-blue-500 hover:from-blue-700 hover:to-blue-600"
+  },
+  {
+    nombre: "Plan Profesional",
+    descripcion: "Ideal para marcas o profesionales que buscan diferenciarse con un diseño pensado desde cero y alineado a su identidad.",
+    precio: 390000,
+    color: "bg-gradient-to-br from-purple-400/90 to-pink-400/90 dark:from-purple-600/90 dark:to-pink-600/90",
+    textColor: "text-white",
+    borderColor: "border-purple-300/50 dark:border-purple-700/50",
+    dotColor: "bg-white",
+    caracteristicas: [
+      "Diseño a medida",
+      "Hasta 5 páginas o secciones",
+      "Sitio autoadministrable",
+      "Adaptable a todos los dispositivos",
+      "Integración con redes sociales",
+      "Certificado SSL (sitio seguro)"
+    ],
+    destacado: true,
+    botonClase: "bg-white text-purple-600 hover:bg-gray-100"
+  },
+  {
+    nombre: "Plan Corporativo",
+    descripcion: "Pensado para empresas o proyectos con una visión clara, que necesitan un sitio profesional, escalable y enfocado en resultados.",
+    precio: 590000,
+    color: "bg-gradient-to-br from-zinc-50 to-zinc-100 dark:from-zinc-900 dark:to-zinc-800",
+    textColor: "text-zinc-900 dark:text-white",
+    borderColor: "border-zinc-200 dark:border-zinc-700",
+    dotColor: "bg-purple-500",
+    caracteristicas: [
+      "Diseño a medida",
+      "Hasta 10 páginas o secciones",
+      "Sitio autoadministrable avanzado",
+      "Optimización SEO avanzada",
+      "Integración con Google Analytics",
+      "Soporte técnico prioritario"
+    ],
+    botonClase: "bg-gradient-to-r from-purple-600 to-purple-500 hover:from-purple-700 hover:to-purple-600"
+  }
+];
+
+// Función para formatear el precio en pesos argentinos
+const formatearPrecio = (precio) => {
+  return new Intl.NumberFormat('es-AR', {
+    style: 'currency',
+    currency: 'ARS',
+    minimumFractionDigits: 0,
+    maximumFractionDigits: 0
+  }).format(precio).replace('ARS', '$');
+};
+---
+
+<section id="planes" class="section-padding bg-zinc-100 dark:bg-zinc-900 relative z-10 overflow-hidden">
+  <div class="absolute top-0 left-0 w-full h-full bg-gradient-to-b from-zinc-100 to-zinc-200 dark:from-zinc-900 dark:to-zinc-800 -z-10"></div>
+  <div class="absolute top-20 left-10 w-72 h-72 bg-blue-500/5 dark:bg-blue-500/10 rounded-full blur-3xl -z-5"></div>
+  <div class="absolute bottom-20 right-10 w-80 h-80 bg-purple-500/5 dark:bg-purple-500/10 rounded-full blur-3xl -z-5"></div>
+  <div class="container">
+    <h2 class="section-title">Conocé nuestros planes</h2>
+    <p class="text-center text-gray-600 dark:text-gray-400 max-w-3xl mx-auto mb-12">
+      Ofrecemos distintas soluciones según el tipo de negocio, el alcance del proyecto y tus objetivos. Elegí el plan que mejor se adapte a vos y descubrí todo lo que podemos hacer juntos.
+    </p>
+
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-6 lg:gap-8 relative z-10">
+      {planes.map((plan, index) => (
+        <div class={`relative rounded-2xl overflow-hidden border ${plan.borderColor} ${plan.destacado ? 'z-10' : ''} transition-all duration-300 hover:shadow-xl hover:-translate-y-1 group plan-card`} data-index={index}>
+          <div class={`p-8 ${plan.color} h-full flex flex-col`}>
+            {plan.destacado && (
+              <div class="absolute top-4 right-4 bg-white dark:bg-purple-900 text-purple-600 dark:text-white text-xs font-bold px-3 py-1 rounded-full shadow-lg popular-badge">
+                Popular
+              </div>
+            )}
+            <div class={`w-10 h-10 rounded-full ${plan.dotColor} mb-6`}></div>
+            <h3 class={`text-2xl font-bold mb-3 ${plan.textColor}`}>{plan.nombre}</h3>
+            <p class={`mb-6 ${plan.textColor} ${plan.destacado ? 'opacity-90' : 'text-gray-600 dark:text-gray-400'}`}>
+              {plan.descripcion}
+            </p>
+            <div class="mb-6">
+              <p class={`text-sm font-medium ${plan.textColor} ${plan.destacado ? 'opacity-90' : 'text-gray-600 dark:text-gray-400'}`}>A partir de</p>
+              <div class={`text-4xl font-bold ${plan.textColor} precio-contador`} data-valor={plan.precio}>
+                {formatearPrecio(0)}
+              </div>
+            </div>
+            <ul class="space-y-4 mb-8 flex-grow relative">
+              {plan.caracteristicas.map((caracteristica) => (
+                <li class={`flex items-start gap-3 ${plan.textColor} ${plan.destacado ? 'opacity-90' : 'text-gray-600 dark:text-gray-400'}`}>
+                  <span class={`mt-1 flex-shrink-0 ${plan.destacado ? 'text-white' : 'text-blue-500 dark:text-purple-400'}`}>
+                    <Check class="w-5 h-5" />
+                  </span>
+                  <span>{caracteristica}</span>
+                </li>
+              ))}
+            </ul>
+            <a 
+              href="#contacto" 
+              class={`block w-full py-3 px-6 rounded-full text-center font-medium transition-all ${plan.botonClase} ${plan.destacado ? '' : 'text-white'}`}
+            >
+              Más información
+            </a>
+          </div>
+        </div>
+      ))}
+    </div>
+    
+    <div class="max-w-4xl mx-auto mt-16 px-4">
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-x-12 gap-y-6 text-center md:text-left">
+        <div class="flex items-center md:items-start gap-3 flex-col md:flex-row">
+          <div class="flex-shrink-0 w-8 h-8 rounded-full bg-blue-500/20 dark:bg-blue-500/30 flex items-center justify-center text-blue-600 dark:text-blue-400">
+            <span class="text-xs font-bold">i</span>
+          </div>
+          <p class="text-sm text-zinc-700 dark:text-zinc-300">Los precios de los planes están expresados en ARS (Pesos Argentinos).</p>
+        </div>
+        
+        <div class="flex items-center md:items-start gap-3 flex-col md:flex-row">
+          <div class="flex-shrink-0 w-8 h-8 rounded-full bg-blue-500/20 dark:bg-blue-500/30 flex items-center justify-center text-blue-600 dark:text-blue-400">
+            <span class="text-xs font-bold">i</span>
+          </div>
+          <p class="text-sm text-zinc-700 dark:text-zinc-300">Para una cotización en otra moneda por favor contactarnos por cualquiera de los medios disponibles.</p>
+        </div>
+        
+        <div class="flex items-center md:items-start gap-3 flex-col md:flex-row">
+          <div class="flex-shrink-0 w-8 h-8 rounded-full bg-blue-500/20 dark:bg-blue-500/30 flex items-center justify-center text-blue-600 dark:text-blue-400">
+            <span class="text-xs font-bold">i</span>
+          </div>
+          <p class="text-sm text-zinc-700 dark:text-zinc-300">Los planes tienen un costo único, sin pagos mensuales. El precio no contempla hosting ni dominio.</p>
+        </div>
+        
+        <div class="flex items-center md:items-start gap-3 flex-col md:flex-row">
+          <div class="flex-shrink-0 w-8 h-8 rounded-full bg-blue-500/20 dark:bg-blue-500/30 flex items-center justify-center text-blue-600 dark:text-blue-400">
+            <span class="text-xs font-bold">i</span>
+          </div>
+          <p class="text-sm text-zinc-700 dark:text-zinc-300">La entrega se estima entre 7 y 30 días, ajustándose a las particularidades de cada caso.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    // Función para animar el contador de precios
+    function animarContador(elemento, valorFinal, duracion = 2000) {
+      // Valor inicial
+      let valorActual = 0;
+      // Calcular el incremento por paso
+      const incremento = valorFinal / (duracion / 16);
+      // Formatear el precio
+      const formatearPrecio = (precio) => {
+        return new Intl.NumberFormat('es-AR', {
+          style: 'currency',
+          currency: 'ARS',
+          minimumFractionDigits: 0,
+          maximumFractionDigits: 0
+        }).format(precio).replace('ARS', '$');
+      };
+      
+      // Función de animación
+      const animar = () => {
+        valorActual += incremento;
+        if (valorActual >= valorFinal) {
+          valorActual = valorFinal;
+          elemento.textContent = formatearPrecio(valorActual);
+          return;
+        }
+        
+        elemento.textContent = formatearPrecio(Math.floor(valorActual));
+        requestAnimationFrame(animar);
+      };
+      
+      animar();
+    }
+    
+    // Configurar la intersección observer para iniciar la animación cuando los elementos sean visibles
+    const observador = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          const elemento = entry.target;
+          // Usar getAttribute para evitar problemas de tipado
+          const valorStr = elemento.getAttribute('data-valor') || '0';
+          const valorFinal = parseInt(valorStr, 10);
+          animarContador(elemento, valorFinal);
+          observador.unobserve(elemento);
+        }
+      });
+    }, { threshold: 0.1 });
+    
+    // Observar todos los elementos con la clase precio-contador
+    document.querySelectorAll('.precio-contador').forEach(contador => {
+      observador.observe(contador);
+    });
+
+    // Mejorar la animación de hover para las tarjetas
+    const planCards = document.querySelectorAll('.plan-card');
+    
+    planCards.forEach(card => {
+      let animationTimeout: number | null = null;
+      let isHovered = false;
+      
+      card.addEventListener('mouseenter', () => {
+        isHovered = true;
+        
+        // Cancelar cualquier timeout pendiente
+        if (animationTimeout !== null) {
+          clearTimeout(animationTimeout);
+          animationTimeout = null;
+        }
+        
+        // Hacer casting explícito a HTMLElement
+        const htmlCard = card as HTMLElement;
+        htmlCard.style.transform = 'translateY(-10px)';
+        htmlCard.style.boxShadow = '0 25px 50px -12px rgba(0, 0, 0, 0.25)';
+      });
+      
+      card.addEventListener('mouseleave', () => {
+        isHovered = false;
+        
+        // Cancelar cualquier timeout pendiente
+        if (animationTimeout !== null) {
+          clearTimeout(animationTimeout);
+        }
+        
+        // Crear un nuevo timeout
+        animationTimeout = window.setTimeout(() => {
+          // Verificar que el mouse realmente ha salido antes de restaurar
+          if (!isHovered) {
+            const htmlCard = card as HTMLElement;
+            htmlCard.style.transform = 'translateY(0)';
+            htmlCard.style.boxShadow = '';
+          }
+          animationTimeout = null;
+        }, 100); // Aumentar ligeramente el retraso para mayor estabilidad
+      });
+    });
+  });
+</script>
+
+<style>
+.plan-card {
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  height: 100%;
+  position: relative;
+  will-change: transform, box-shadow;
+}
+
+.caracteristicas-adicionales {
+  transition: all 0.3s ease;
+  position: relative;
+  width: 100%;
+}
+
+/* Asegurar que las tarjetas tengan la misma altura base */
+@media (min-width: 768px) {
+  .grid-cols-3 > .plan-card {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .grid-cols-3 > .plan-card > div {
+    flex: 1;
+  }
+}
+</style>

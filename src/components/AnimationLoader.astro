@@ -1,4 +1,5 @@
-<!-- CÓDIGO MODIFICADO -->
+---
+---
 <script is:inline>
   // Verificar si GSAP ya está cargado
   if (typeof gsap === 'undefined') {
@@ -7,6 +8,7 @@
       return new Promise((resolve, reject) => {
         const script = document.createElement('script');
         script.src = src;
+        script.async = true;
         script.onload = resolve;
         script.onerror = reject;
         document.head.appendChild(script);
@@ -33,7 +35,13 @@
     console.log('Inicializando animaciones GSAP');
     
     // Registrar plugins
-    gsap.registerPlugin(ScrollTrigger);
+    if (typeof gsap !== 'undefined' && gsap.registerPlugin && typeof ScrollTrigger !== 'undefined') {
+      gsap.registerPlugin(ScrollTrigger);
+      console.log('ScrollTrigger registrado correctamente');
+    } else {
+      console.warn('No se pudo registrar ScrollTrigger, puede que no esté disponible');
+      return; // Salir si no podemos registrar ScrollTrigger
+    }
     
     // Animación de la navbar
     const navbarTl = gsap.timeline();
@@ -119,13 +127,14 @@
     
     // Animaciones al hacer scroll
     
-    // Animación para secciones al hacer scroll
-    const sections = document.querySelectorAll("section:not(#top)");
+    // Animación para secciones al hacer scroll (excluyendo la sección de planes)
+    const sections = document.querySelectorAll("section:not(#top):not(#planes)");
     sections.forEach(section => {
       gsap.from(section.querySelectorAll("h2, p, .grid > *"), {
         scrollTrigger: {
           trigger: section,
           start: "top 80%",
+          once: true // Importante: solo se ejecuta una vez
         },
         opacity: 0,
         y: 30,
@@ -181,6 +190,104 @@
       // Actualizar el navbar según la posición actual del scroll
       updateNavbarStyle(window.scrollY > 10);
     });
+    
+    // Animaciones específicas para la sección de planes
+    const planesSection = document.getElementById('planes');
+    if (planesSection) {
+      // Animación para el título y descripción
+      gsap.from(planesSection.querySelectorAll("h2, p.text-center"), {
+        scrollTrigger: {
+          trigger: planesSection,
+          start: "top 80%",
+          once: true // Importante: solo se ejecuta una vez
+        },
+        opacity: 0,
+        y: 30,
+        stagger: 0.2,
+        duration: 0.8,
+        ease: "power2.out"
+      });
+      
+      // Animación para las tarjetas de planes
+      const planCards = planesSection.querySelectorAll(".plan-card");
+      if (planCards.length > 0) {
+        console.log("Inicializando animaciones para", planCards.length, "tarjetas de planes");
+        
+        // Asegurarse de que las tarjetas sean visibles inicialmente
+        gsap.set(planCards, { opacity: 1 });
+        
+        // Animación de entrada
+        gsap.fromTo(planCards, 
+          { y: 50, opacity: 0, scale: 0.95 },
+          {
+            y: 0,
+            opacity: 1,
+            scale: 1,
+            duration: 0.8,
+            stagger: 0.2,
+            ease: "back.out(1.7)",
+            scrollTrigger: {
+              trigger: planesSection,
+              start: "top 70%",
+              once: true // Importante: solo se ejecuta una vez
+            }
+          }
+        );
+        
+        // Animación para la etiqueta "Popular"
+        const popularBadge = planesSection.querySelector('.popular-badge');
+        if (popularBadge) {
+          gsap.fromTo(popularBadge,
+            { scale: 0, rotation: -15, opacity: 0 },
+            {
+              scale: 1,
+              rotation: 0,
+              opacity: 1,
+              duration: 0.6,
+              delay: 0.6, // Retrasar para que aparezca después de las tarjetas
+              ease: "elastic.out(1.2, 0.5)",
+              scrollTrigger: {
+                trigger: planesSection,
+                start: "top 70%",
+                once: true
+              }
+            }
+          );
+        }
+        
+        // Configurar animaciones de hover para las tarjetas - Versión mejorada
+        planCards.forEach(card => {
+          // Crear una variable para rastrear si la animación está en curso
+          let isAnimating = false;
+          
+          card.addEventListener('mouseenter', function() {
+            if (isAnimating) return; // Evitar múltiples animaciones simultáneas
+            isAnimating = true;
+            
+            gsap.to(this, {
+              y: -10,
+              boxShadow: "0 25px 50px -12px rgba(0, 0, 0, 0.25)",
+              duration: 0.2, // Duración más corta para respuesta más rápida
+              ease: "power1.out", // Ease más simple para mejor rendimiento
+              onComplete: () => { isAnimating = false; }
+            });
+          });
+          
+          card.addEventListener('mouseleave', function() {
+            if (isAnimating) return; // Evitar múltiples animaciones simultáneas
+            isAnimating = true;
+            
+            gsap.to(this, {
+              y: 0,
+              boxShadow: "0 10px 15px -3px rgba(0, 0, 0, 0.1)",
+              duration: 0.2, // Duración más corta para respuesta más rápida
+              ease: "power1.out", // Ease más simple para mejor rendimiento
+              onComplete: () => { isAnimating = false; }
+            });
+          });
+        });
+      }
+    }
     
     console.log('Animaciones GSAP inicializadas');
   }

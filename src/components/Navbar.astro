@@ -13,13 +13,13 @@ const navItems = [
   { href: "#top", icon: HomeIcon, text: "Inicio" },
   { href: "#servicios", icon: ServicesIcon, text: "Servicios" },
   { href: "#tecnologias", icon: TechIcon, text: "Tecnologías" },
+  { href: "#proyectos", icon: ProjectsIcon, text: "Proyectos" },
   { href: "#faq", icon: FaqIcon, text: "FAQ" },
-  { href: "#contacto", icon: ContactIcon, text: "Contacto" },
-  { href: "#proyectos", icon: ProjectsIcon, text: "proyectos" }
+  { href: "#contacto", icon: ContactIcon, text: "Contacto" }
 ];
 ---
 
-<header class="fixed w-full top-0 z-50 bg-white/80 dark:bg-black/80 backdrop-blur-md transition-colors duration-500">
+<header class="fixed w-full top-0 z-40 bg-white/80 dark:bg-black/80 backdrop-blur-md transition-colors duration-500">
   <div class="container mx-auto px-4 py-5 flex items-center justify-between">
     <!-- Logo centrado en móvil, a la izquierda en desktop -->
     <a href="#top" class="smooth-scroll gsap-logo">
@@ -36,12 +36,12 @@ const navItems = [
         Tecnologías
         <div class="absolute -bottom-1 left-0 w-full h-0.5 bg-zinc-900 dark:bg-white scale-x-0 group-hover:scale-x-100 transition-transform origin-left duration-300"></div>
       </a>
-      <a href="#faq" class="relative group hover:text-zinc-600 dark:hover:text-gray-300 transition-colors">
-        FAQ
-        <div class="absolute -bottom-1 left-0 w-full h-0.5 bg-zinc-900 dark:bg-white scale-x-0 group-hover:scale-x-100 transition-transform origin-left duration-300"></div>
-      </a>
       <a href="#proyectos" class="relative group hover:text-zinc-600 dark:hover:text-gray-300 transition-colors">
         Proyectos
+        <div class="absolute -bottom-1 left-0 w-full h-0.5 bg-zinc-900 dark:bg-white scale-x-0 group-hover:scale-x-100 transition-transform origin-left duration-300"></div>
+      </a>
+      <a href="#faq" class="relative group hover:text-zinc-600 dark:hover:text-gray-300 transition-colors">
+        FAQ
         <div class="absolute -bottom-1 left-0 w-full h-0.5 bg-zinc-900 dark:bg-white scale-x-0 group-hover:scale-x-100 transition-transform origin-left duration-300"></div>
       </a>
       <a href="#contacto" class="relative group hover:text-zinc-600 dark:hover:text-gray-300 transition-colors">
@@ -120,62 +120,48 @@ const navItems = [
       </button>
     </div>
   </div>
+</header>
 
-  <!-- Menú móvil desplegable con animaciones mejoradas -->
-  <div id="mobile-menu" class="fixed inset-0 bg-white/95 dark:bg-black/95 z-50 flex-col justify-center items-center hidden transition-all duration-300 mt-72">
-    <button id="close-menu" class="fixed top-10 right-5 text-zinc-900 dark:text-white p-2 z-50">
-      <X class="w-6 h-6" />
-    </button>
-    
-    <!-- Botón de tema en el menú móvil desplegado -->
-    <div class="absolute top-5 left-5">
-      <button 
-        id="theme-toggle-menu" 
-        class="p-3 rounded-full bg-zinc-100 hover:bg-zinc-200 dark:bg-zinc-800 dark:hover:bg-zinc-700 transition-all duration-300 shadow-md border border-zinc-200 dark:border-zinc-700" 
-        aria-label="Cambiar tema"
-      >
-        <!-- Icono Sol (visible en modo oscuro) -->
-        <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 hidden dark:block text-zinc-900 dark:text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-          <circle cx="12" cy="12" r="5"></circle>
-          <line x1="12" y1="1" x2="12" y2="3"></line>
-          <line x1="12" y1="21" x2="12" y2="23"></line>
-          <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
-          <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
-          <line x1="1" y1="12" x2="3" y2="12"></line>
-          <line x1="21" y1="12" x2="23" y2="12"></line>
-          <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
-          <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
-        </svg>
-        
-        <!-- Icono Luna (visible en modo claro) -->
-        <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 block dark:hidden text-zinc-900 dark:text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-          <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
-        </svg>
-      </button>
-    </div>
-    
-    <!-- Contenedor con fondo para los enlaces del menú -->
-    <div id="menu-content" class="w-full max-w-sm bg-zinc-100/90 dark:bg-zinc-800/90 p-8 rounded-xl shadow-lg transform scale-95 opacity-0 transition-all duration-300">
-      <nav class="flex flex-col items-center gap-6 text-xl text-zinc-900 dark:text-white">
-        {navItems.map((item) => (
-          <a href={item.href} class="w-full py-3 flex items-center justify-center hover:bg-zinc-200 dark:hover:bg-zinc-700 rounded-lg transition-colors menu-link">
-            <item.icon class="w-5 h-5 mr-3" />
-            {item.text}
-          </a>
-        ))}
+<!-- Menú móvil desplegable con animación lateral -->
+<div id="mobile-menu" class="fixed inset-0 z-50 hidden">
+  <!-- Panel que se desliza desde la derecha y cubre toda la pantalla -->
+  <div id="menu-panel" class="fixed inset-0 bg-white dark:bg-zinc-900 transform translate-x-full transition-transform duration-300">
+    <div class="h-full flex flex-col">
+      <!-- Cabecera del menú con logo y botón de cerrar -->
+      <div class="flex justify-between items-center p-5 border-b border-zinc-200 dark:border-zinc-800">
+        <Logo class="h-10 w-auto" />
+        <button id="close-menu" class="text-zinc-900 dark:text-white p-2">
+          <X class="w-6 h-6" />
+        </button>
+      </div>
+      
+      <!-- Contenido del menú - sin scroll -->
+      <div class="flex-1 flex flex-col justify-center items-center p-8">
+        <nav class="w-full flex flex-col items-center gap-6">
+          {navItems.map((item) => (
+            <a href={item.href} class="w-full py-3 flex items-center justify-center hover:bg-zinc-100 dark:hover:bg-zinc-800 rounded-lg transition-colors menu-link text-xl">
+              <item.icon class="w-6 h-6 mr-3" />
+              <span>{item.text}</span>
+            </a>
+          ))}
+        </nav>
+      </div>
+      
+      <!-- Botón de contacto en la parte inferior -->
+      <div class="p-8 border-t border-zinc-200 dark:border-zinc-800">
         <a
           href="https://wa.me/+543884326541?text=Hola,%20me%20interesa%20conocer%20más%20sobre%20tus%20servicios"
           target="_blank"
           rel="noopener noreferrer"
-          class="w-full mt-4 bg-zinc-900 text-white dark:bg-white dark:text-black px-6 py-3 text-center hover:bg-zinc-800 dark:hover:bg-gray-200 transition-colors shadow-md menu-link flex items-center justify-center rounded-full"
+          class="w-full bg-zinc-900 text-white dark:bg-white dark:text-black px-6 py-4 text-center hover:bg-zinc-800 dark:hover:bg-gray-200 transition-colors shadow-md menu-link flex items-center justify-center rounded-full"
         >
-          <ContactIcon class="w-5 h-5 mr-3 " />
+          <ContactIcon class="w-5 h-5 mr-3" />
           Contactar por WhatsApp
         </a>
-      </nav>
+      </div>
     </div>
   </div>
-</header>
+</div>
 
 <script>
   document.addEventListener('DOMContentLoaded', () => {
@@ -183,45 +169,37 @@ const navItems = [
     const menuToggle = document.getElementById('menu-toggle');
     const closeMenu = document.getElementById('close-menu');
     const mobileMenu = document.getElementById('mobile-menu');
-    const menuContent = document.getElementById('menu-content');
+    const menuPanel = document.getElementById('menu-panel');
     const mobileLinks = document.querySelectorAll('.menu-link');
 
-    // Función para abrir el menú con animación
+    // Función para abrir el menú con animación lateral
     function openMenu() {
-      // Verificar que los elementos existen antes de manipularlos
-      if (!mobileMenu || !menuContent) return;
+      // Verificar que los elementos existen
+      if (!mobileMenu || !menuPanel) return;
       
       // Mostrar el contenedor del menú
       mobileMenu.classList.remove('hidden');
-      mobileMenu.classList.add('flex');
+      mobileMenu.classList.add('block');
       document.body.style.overflow = 'hidden';
       
       // Pequeño retraso para que la transición funcione
       setTimeout(() => {
-        // Animar el fondo (fade in)
-        mobileMenu.classList.add('bg-visible');
-        
-        // Animar el contenido (scale up + fade in)
-        menuContent.classList.remove('scale-95', 'opacity-0');
-        menuContent.classList.add('scale-100', 'opacity-100');
+        // Animar el panel lateral (deslizar desde la derecha)
+        menuPanel.classList.remove('translate-x-full');
       }, 10);
     }
-    
+
     // Función para cerrar el menú con animación
     function closeMenuWithAnimation() {
-      // Verificar que los elementos existen antes de manipularlos
-      if (!mobileMenu || !menuContent) return;
+      // Verificar que los elementos existen
+      if (!mobileMenu || !menuPanel) return;
       
-      // Animar el fondo (fade out)
-      mobileMenu.classList.remove('bg-visible');
-      
-      // Animar el contenido (scale down + fade out)
-      menuContent.classList.remove('scale-100', 'opacity-100');
-      menuContent.classList.add('scale-95', 'opacity-0');
+      // Animar el panel lateral (deslizar hacia la derecha)
+      menuPanel.classList.add('translate-x-full');
       
       // Esperar a que termine la animación antes de ocultar
       setTimeout(() => {
-        mobileMenu.classList.remove('flex');
+        mobileMenu.classList.remove('block');
         mobileMenu.classList.add('hidden');
         document.body.style.overflow = '';
       }, 300);
@@ -265,8 +243,8 @@ const navItems = [
         button.classList.remove('scale-90');
       }, 200);
       
-   // Notificar el cambio de tema - Versión corregida para TypeScript
-   try {
+      // Notificar el cambio de tema - Versión corregida para TypeScript
+      try {
         // Verificar si la función existe en window de manera segura para TypeScript
         const win = window as any;
         if (typeof win.dispatchThemeChange === 'function') {
@@ -305,61 +283,47 @@ const navItems = [
     }
     
     // Manejar el desplazamiento suave para todos los enlaces internos
-  // Manejar el desplazamiento suave para todos los enlaces internos
-document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-  anchor.addEventListener('click', function(e) {
-    e.preventDefault();
-    
-    // Si es el enlace del logo, desplazarse al inicio
-    if (this.getAttribute('href') === '#top') {
-      window.scrollTo({
-        top: 0,
-        behavior: 'smooth'
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function(e) {
+        e.preventDefault();
+        
+        // Si es el enlace del logo, desplazarse al inicio
+        if (this.getAttribute('href') === '#top') {
+          window.scrollTo({
+            top: 0,
+            behavior: 'smooth'
+          });
+        } else {
+          // Para otros enlaces, desplazarse al elemento correspondiente
+          const targetId = this.getAttribute('href');
+          const targetElement = document.querySelector(targetId);
+          
+          if (targetElement) {
+            // Obtener la altura de la barra de navegación
+            const navbarHeight = document.querySelector('header')?.offsetHeight || 0;
+            
+            // Calcular la posición de desplazamiento con offset
+            const elementPosition = targetElement.getBoundingClientRect().top + window.pageYOffset;
+            const offsetPosition = elementPosition - navbarHeight - 20; // 20px extra de espacio
+            
+            // Desplazarse a la posición calculada
+            window.scrollTo({
+              top: offsetPosition,
+              behavior: 'smooth'
+            });
+          }
+        }
       });
-    } else {
-      // Para otros enlaces, desplazarse al elemento correspondiente
-      const targetId = this.getAttribute('href');
-      const targetElement = document.querySelector(targetId);
-      
-      if (targetElement) {
-        // Obtener la altura de la barra de navegación
-        const navbarHeight = document.querySelector('header')?.offsetHeight || 0;
-        
-        // Calcular la posición de desplazamiento con offset
-        const elementPosition = targetElement.getBoundingClientRect().top + window.pageYOffset;
-        const offsetPosition = elementPosition - navbarHeight - (-30); // 20px extra de espacio
-        
-        // Desplazarse a la posición calculada
-        window.scrollTo({
-          top: offsetPosition,
-          behavior: 'smooth'
-        });
-      }
-    }
-  });
-});
+    });
     
     console.log('Script de Navbar cargado correctamente');
   });
 </script>
 
 <style>
-  /* Estilos mejorados para las transiciones del menú */
-  #mobile-menu {
-    transition: background-color 0.4s ease;
-  }
-  
-  #mobile-menu.bg-visible {
-    background-color: rgba(255, 255, 255, 0.95);
-  }
-  
-  .dark #mobile-menu.bg-visible {
-    background-color: rgba(0, 0, 0, 0.95);
-  }
-  
-  #menu-content {
-    transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), 
-                opacity 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  /* Estilos para el menú móvil con animación lateral */
+  #menu-panel {
+    transition: transform 0.3s ease-out;
   }
   
   /* Animación para los enlaces del menú */
@@ -372,7 +336,7 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
   }
   
   .menu-link:active {
-    transform: translateY(0px);
+    transform: translateY(0);
   }
   
   /* Efecto de pulsación para los botones de tema */
@@ -390,14 +354,10 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
   
   /* Animación para el botón de cerrar */
   #close-menu {
-    opacity: 0;
-    transform: rotate(-90deg) scale(0.8);
-    transition: opacity 0.3s ease, transform 0.3s ease;
+    transition: transform 0.2s ease;
   }
   
-  #mobile-menu.bg-visible #close-menu {
-    opacity: 1;
-    transform: rotate(0) scale(1);
-    transition-delay: 0.1s;
+  #close-menu:hover {
+    transform: rotate(90deg);
   }
 </style>
