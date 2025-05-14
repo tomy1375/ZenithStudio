@@ -2,75 +2,89 @@
 // Importar íconos necesarios
 import Check from '../components/icons/Check.astro';
 import Plus from '../components/icons/Plus.astro';
+import Code from '../components/icons/Code.astro';
+import ShoppingBag from '../components/icons/ShoppingBag.astro';
+import Layout from '../components/icons/Layout.astro';
 
-// Modificar la definición de los planes para mostrar 6 características directamente
+// Modificar la definición del Plan Market para usar el mismo fondo que los otros planes
+// y cambiar la función de formateo de precios para mostrar dólares
+
+// Cambiar el objeto del Plan Market (segundo plan en el array)
 const planes = [
   {
-    nombre: "Plan Base",
-    descripcion: "Pensado para emprendedores o pequeños negocios que buscan un sitio profesional con diseño a medida y armado ágil, sin complicaciones.",
-    precio: 220000,
+    nombre: "Plan Velocity",
+    descripcion: "Sitios ultrarrápidos con diseño a medida y optimización total para destacar online con impacto.",
+    precio: 299,
     color: "bg-gradient-to-br from-zinc-50 to-zinc-100 dark:from-zinc-900 dark:to-zinc-800",
     textColor: "text-zinc-900 dark:text-white",
     borderColor: "border-zinc-200 dark:border-zinc-700",
     dotColor: "bg-blue-500",
+    icon: Code,
+    iconClass: "text-blue-500 dark:text-blue-400",
+    tagline: "Rendimiento y diseño",
     caracteristicas: [
-      "Diseño a medida",
-      "Hasta 3 páginas o secciones",
-      "Responsive (todos los dispositivos)",
-      "Formulario de contacto básico",
-      "Botón de WhatsApp",
-      "Certificado SSL incluido"
+      "Desarrollo con frameworks de última generación",
+      "Diseño personalizado y branding a medida",
+      "Hasta 5 secciones o páginas",
+      "Optimización de velocidad y SEO",
+      "Hosting estático con CDN integrado",
+      "Certificado SSL y seguridad garantizada"
     ],
     botonClase: "bg-gradient-to-r from-blue-600 to-blue-500 hover:from-blue-700 hover:to-blue-600"
   },
   {
-    nombre: "Plan Profesional",
-    descripcion: "Pensado para marcas, equipos o profesionales que buscan un sitio más abarcativo, autoadministrable y 100% alineado a su identidad visual.",
-    precio: 390000,
-    color: "bg-gradient-to-br from-purple-400/90 to-pink-400/90 dark:from-purple-600/90 dark:to-pink-600/90",
-    textColor: "text-white",
-    borderColor: "border-purple-300/50 dark:border-purple-700/50",
-    dotColor: "bg-white",
-    caracteristicas: [
-      "Diseño a medida",
-      "Hasta 5 páginas o secciones",
-      "Panel de administración CMS",
-      "Responsive (todos los dispositivos)",
-      "Integración con redes sociales",
-      "Certificado SSL incluido"
-    ],
-    destacado: true,
-    botonClase: "bg-white text-purple-600 hover:bg-gray-100"
-  },
-  {
-    nombre: "Plan Corporativo",
-    descripcion: "Pensado para empresas que necesitan funcionalidades avanzadas: áreas privadas, gestión de bases de datos y contenido personalizado.",
-    precio: 790000,
+    nombre: "Plan Market",
+    descripcion: "Tu tienda online llave en mano: catálogo dinámico, pagos seguros, gestión fácil y máxima autonomía.",
+    precio: 599,
     color: "bg-gradient-to-br from-zinc-50 to-zinc-100 dark:from-zinc-900 dark:to-zinc-800",
     textColor: "text-zinc-900 dark:text-white",
     borderColor: "border-zinc-200 dark:border-zinc-700",
     dotColor: "bg-purple-500",
+    icon: ShoppingBag,
+    iconClass: "text-purple-500 dark:text-purple-400",
+    tagline: "E-commerce completo",
     caracteristicas: [
-      "Diseño a medida",
-      "Hasta 10 páginas o secciones",
+      "Catálogo de productos personalizado",
+      "Pasarelas de pago y envío configuradas",
+      "Panel de administración intuitivo",
+      "Diseño responsive y mobile first",
+      "Integración con redes sociales y marketing",
+      "SEO básico y métricas de rendimiento"
+    ],
+    destacado: true,
+    botonClase: "bg-gradient-to-r from-purple-600 to-purple-500 hover:from-purple-700 hover:to-purple-600"
+  },
+  {
+    nombre: "Plan Enterprise",
+    descripcion: "Solución robusta con área privada, gestión de archivos y funcionalidades avanzadas.",
+    precio: 899,
+    color: "bg-gradient-to-br from-zinc-50 to-zinc-100 dark:from-zinc-900 dark:to-zinc-800",
+    textColor: "text-zinc-900 dark:text-white",
+    borderColor: "border-zinc-200 dark:border-zinc-700",
+    dotColor: "bg-purple-500",
+    icon: Layout,
+    iconClass: "text-purple-500 dark:text-purple-400",
+    tagline: "Solución corporativa",
+    caracteristicas: [
+      "Diseño y desarrollo a medida completo",
       "CMS avanzado con roles de usuario",
-      "Área privada / zona de clientes",
-      "Subida y descarga de archivos (planos, documentos)",
-      "Optimización SEO y Analytics"
+      "Área privada y acceso personalizado",
+      "Subida, búsqueda y gestión de archivos",
+      "Historial de descargas y estadísticas",
+      "Soporte continuo y mantenimiento"
     ],
     botonClase: "bg-gradient-to-r from-purple-600 to-purple-500 hover:from-purple-700 hover:to-purple-600"
   }
 ];
 
-
-// Función para formatear el precio en pesos argentinos
+// Reemplazar la función de formateo de precios para mostrar dólares
 const formatearPrecio = (precio) => {
-  return new Intl.NumberFormat('es-AR', {
+  return new Intl.NumberFormat('en-US', {
     style: 'currency',
-    currency: 'ARS',
+    currency: 'USD',
     minimumFractionDigits: 0,
     maximumFractionDigits: 0
-  }).format(precio).replace('ARS', '$');
+  }).format(precio);
 };
 ---
 
@@ -85,45 +99,47 @@ const formatearPrecio = (precio) => {
     </p>
 
     <div class="grid grid-cols-1 md:grid-cols-3 gap-6 lg:gap-8 relative z-10">
-      {planes.map((plan, index) => (
-        <div class={`relative rounded-2xl overflow-hidden border ${plan.borderColor} ${plan.destacado ? 'z-10' : ''} transition-all duration-300 hover:shadow-xl hover:-translate-y-1 group plan-card`} data-index={index}>
-          <div class={`p-8 ${plan.color} h-full flex flex-col`}>
-            {plan.destacado && (
-              <div class="absolute top-4 right-4 bg-white dark:bg-purple-900 text-purple-600 dark:text-white text-xs font-bold px-3 py-1 rounded-full shadow-lg popular-badge">
-                Popular
-              </div>
-            )}
-            <div class={`w-10 h-10 rounded-full ${plan.dotColor} mb-6`}></div>
-            <h3 class={`text-2xl font-bold mb-3 ${plan.textColor}`}>{plan.nombre}</h3>
-            <p class={`mb-6 ${plan.textColor} ${plan.destacado ? 'opacity-90' : 'text-gray-600 dark:text-gray-400'}`}>
-              {plan.descripcion}
-            </p>
-            <div class="mb-6">
-              <p class={`text-sm font-medium ${plan.textColor} ${plan.destacado ? 'opacity-90' : 'text-gray-600 dark:text-gray-400'}`}>A partir de</p>
-              <div class={`text-4xl font-bold ${plan.textColor} precio-contador`} data-valor={plan.precio}>
-                {formatearPrecio(0)}
-              </div>
-            </div>
-            <ul class="space-y-4 mb-8 flex-grow relative">
-              {plan.caracteristicas.map((caracteristica) => (
-                <li class={`flex items-start gap-3 ${plan.textColor} ${plan.destacado ? 'opacity-90' : 'text-gray-600 dark:text-gray-400'}`}>
-                  <span class={`mt-1 flex-shrink-0 ${plan.destacado ? 'text-white' : 'text-blue-500 dark:text-purple-400'}`}>
-                    <Check class="w-5 h-5" />
-                  </span>
-                  <span>{caracteristica}</span>
-                </li>
-              ))}
-            </ul>
-            <a 
-              href="#contacto" 
-              class={`block w-full py-3 px-6 rounded-full text-center font-medium transition-all ${plan.botonClase} ${plan.destacado ? '' : 'text-white'}`}
-            >
-              Más información
-            </a>
+  {planes.map((plan, index) => (
+    <div class={`relative rounded-2xl overflow-hidden border ${plan.borderColor} ${plan.destacado ? 'z-10 md:scale-105' : ''} transition-all duration-300 hover:shadow-xl hover:-translate-y-1 group plan-card`} data-index={index}>
+      <div class={`p-8 ${plan.color} h-full flex flex-col`}>
+        <div class="flex items-center mb-6">
+          <div class={`w-10 h-10 rounded-full ${plan.dotColor} flex items-center justify-center`}>
+            <plan.icon class={`w-5 h-5 ${plan.iconClass}`} />
+          </div>
+          <div class="ml-3">
+            <span class={`text-xs font-semibold uppercase tracking-wider ${plan.textColor} opacity-80`}>{plan.tagline}</span>
           </div>
         </div>
-      ))}
+        <h3 class={`text-2xl font-bold mb-3 ${plan.textColor}`}>{plan.nombre}</h3>
+        <p class={`mb-6 ${plan.textColor} ${plan.destacado ? 'opacity-90' : 'text-gray-600 dark:text-gray-400'}`}>
+          {plan.descripcion}
+        </p>
+        <div class="mb-6">
+          <p class={`text-sm font-medium ${plan.textColor} ${plan.destacado ? 'opacity-90' : 'text-gray-600 dark:text-gray-400'}`}>A partir de</p>
+          <div class={`text-4xl font-bold ${plan.textColor} precio-contador`} data-valor={plan.precio}>
+            {formatearPrecio(0)}
+          </div>
+        </div>
+        <ul class="space-y-4 mb-8 flex-grow relative">
+          {plan.caracteristicas.map((caracteristica) => (
+            <li class={`flex items-start gap-3 ${plan.textColor} ${plan.destacado ? 'opacity-90' : 'text-gray-600 dark:text-gray-400'}`}>
+              <span class={`mt-1 flex-shrink-0 ${plan.destacado ? 'text-white' : plan.iconClass}`}>
+                <Check class="w-5 h-5" />
+              </span>
+              <span>{caracteristica}</span>
+            </li>
+          ))}
+        </ul>
+        <a 
+          href="#contacto" 
+          class={`block w-full py-3 px-6 rounded-full text-center font-medium transition-all ${plan.botonClase} ${plan.destacado ? '' : 'text-white'}`}
+        >
+          Más información
+        </a>
+      </div>
     </div>
+  ))}
+</div>
     
     <div class="max-w-4xl mx-auto mt-16 px-4">
       <div class="grid grid-cols-1 md:grid-cols-2 gap-x-12 gap-y-6 text-center md:text-left">
@@ -131,14 +147,14 @@ const formatearPrecio = (precio) => {
           <div class="flex-shrink-0 w-8 h-8 rounded-full bg-blue-500/20 dark:bg-blue-500/30 flex items-center justify-center text-blue-600 dark:text-blue-400">
             <span class="text-xs font-bold">i</span>
           </div>
-          <p class="text-sm text-zinc-700 dark:text-zinc-300">Los precios de los planes están expresados en ARS (Pesos Argentinos).</p>
+          <p class="text-sm text-zinc-700 dark:text-zinc-300">Los precios de los planes están expresados en USD (Dólares Estadounidenses).</p>
         </div>
         
         <div class="flex items-center md:items-start gap-3 flex-col md:flex-row">
           <div class="flex-shrink-0 w-8 h-8 rounded-full bg-blue-500/20 dark:bg-blue-500/30 flex items-center justify-center text-blue-600 dark:text-blue-400">
             <span class="text-xs font-bold">i</span>
           </div>
-          <p class="text-sm text-zinc-700 dark:text-zinc-300">Para una cotización en otra moneda por favor contactarnos por cualquiera de los medios disponibles.</p>
+          <p class="text-sm text-zinc-700 dark:text-zinc-300">Para una cotización en pesos argentinos por favor contactarnos por cualquiera de los medios disponibles.</p>
         </div>
         
         <div class="flex items-center md:items-start gap-3 flex-col md:flex-row">
@@ -152,7 +168,7 @@ const formatearPrecio = (precio) => {
           <div class="flex-shrink-0 w-8 h-8 rounded-full bg-blue-500/20 dark:bg-blue-500/30 flex items-center justify-center text-blue-600 dark:text-blue-400">
             <span class="text-xs font-bold">i</span>
           </div>
-          <p class="text-sm text-zinc-700 dark:text-zinc-300">La entrega se estima entre 14 y 30 días, ajustándose a las particularidades de cada caso.</p>
+          <p class="text-sm text-zinc-700 dark:text-zinc-300">La entrega se estima entre 7 y 30 días, ajustándose a las particularidades de cada caso.</p>
         </div>
       </div>
     </div>
@@ -169,12 +185,12 @@ const formatearPrecio = (precio) => {
       const incremento = valorFinal / (duracion / 16);
       // Formatear el precio
       const formatearPrecio = (precio) => {
-        return new Intl.NumberFormat('es-AR', {
+        return new Intl.NumberFormat('en-US', {
           style: 'currency',
-          currency: 'ARS',
+          currency: 'USD',
           minimumFractionDigits: 0,
           maximumFractionDigits: 0
-        }).format(precio).replace('ARS', '$');
+        }).format(precio);
       };
       
       // Función de animación
